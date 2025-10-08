@@ -46,5 +46,5 @@
 
 ## ER-діаграма
 <p align="center">
-    <img src='diagrams/diagram.png'/>
+    <img src='diagrams/diagram.jpg'/>
 </p>
