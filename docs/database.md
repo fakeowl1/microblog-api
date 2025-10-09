@@ -1,15 +1,8 @@
 # Work In Progress
 
 ## Сутності
-- User - користувач
-- Post - публікація користувача
-- Comment - комментар
-- Message - повідомлення
-- Community - спільнота
-- Tag - тег
-- Friendship - дружба
 
-## Використання
+TODO: Add description for entities
 
 ### 1. User
 - Реєстрація
