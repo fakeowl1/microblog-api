@@ -2,8 +2,6 @@
 
 ## Сутності
 
-TODO: Add description for entities
-
 ### 1. User
 - Реєстрація
 - Аунтефікація
