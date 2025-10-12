@@ -12,7 +12,7 @@
 
 | Поле          | Тип                   | Обмеження                            |
 |---------------|-----------------------|--------------------------------------|
-| username      | VARCHAR(15)         | Унікальний, без спеціальних символів |
+| username      | VARCHAR(15)           | Унікальний, без спеціальних символів |
 | password_hash | VARCHAR               | Хеш паролю                           |
 | email         | VARCHAR               | Унікальний, у форматі пошти          |
 | status        | ENUM(online, offline) | Лише 'online' чи 'offline'           |
@@ -30,11 +30,11 @@
 | Поле          | Тип               | Обмеження            |
 |---------------|-------------------|----------------------|
 | creator_id    | INT (Foreign Key) |                      |
-| title         | VARCHAR(32)     | Від 8 символів до 32 |
+| title         | VARCHAR(32)       | Від 8 символів до 32 |
 | text          | VARCHAR(1024)     |                      |
 | media_url     | VARCHAR(128)      | Посилання на файл    |
 | likes         | INT UNSIGNED      | ≥ 0                  |
-| dislike         | INT UNSIGNED      | ≥ 0                  |
+| dislike       | INT UNSIGNED      | ≥ 0                  |
 | views         | INT UNSIGNED      | ≥ 0                  |
 | created_at    | DATETIME          |                      |
 
@@ -60,7 +60,7 @@
 | name          | VARCHAR(32)       | Не більше 32 символів |
 
 
-### 5. Messages
+### 5. PrivateMessage
 - Надіслати користовачу
 - Редагувати
 - Видалити
@@ -112,6 +112,19 @@
 |---------------|------------------------------------|------------------------|
 | community_id  | INT (Foreign Key)                  |                        |
 | user_id       | INT (Foreign Key)                  |                        |
+
+
+### 7. PostMedia
+- Додати медіа до публікації
+- Видалити медіа
+
+| Поле          | Тип                                | Обмеження              |
+|---------------|------------------------------------|------------------------|
+| id            | INT                                |                        |
+| media_url     | VARCHAR(128)                       | Посилання 128 символів |
+| post_id       | INT (Foreign Key)                  |                        |
+
+
 
 ## ER-діаграма
 <p align="center">
