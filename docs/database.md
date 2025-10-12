@@ -32,7 +32,6 @@
 | creator_id    | INT (Foreign Key) |                      |
 | title         | VARCHAR(32)       | Від 8 символів до 32 |
 | text          | VARCHAR(1024)     |                      |
-| media_url     | VARCHAR(128)      | Посилання на файл    |
 | likes         | INT UNSIGNED      | ≥ 0                  |
 | dislike       | INT UNSIGNED      | ≥ 0                  |
 | views         | INT UNSIGNED      | ≥ 0                  |
