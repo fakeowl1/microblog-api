@@ -67,7 +67,7 @@
 |---------------|------------------------|------------------------------|
 | sender_id     | INT (Foreign Key)      |                              |
 | receiver_id   | INT (Foreign Key)      |                              |
-| text          | VARCHAR(256)           | Не більше 256 символів       |
+| text          | VARCHAR(256)           | 256 ≤                        |
 | status        | ENUM(readed, unreaded) | Лише 'readed' чи 'unreaded'  |
 | media_url     | VARCHAR(128)           |                              |
 | created_at    | DATETIME               |                              |
@@ -175,9 +175,9 @@ CREATE TABLE IF NOT EXISTS PrivateMessage (
 CREATE TYPE FRIENDSHIP_STATUS AS ENUM('readed', 'unreaded');
 
 CREATE TABLE IF NOT EXISTS Friendship (
-    id INTEGER PRIMARY KEY,
     user_id INTEGER references "User" (id),
     followed_id INTEGER references "User" (id),
-    status FRIENDSHIP_STATUS NOT NULL
+    status FRIENDSHIP_STATUS NOT NULL,
+    PRIMARY KEY (user_id, followed_id)
 );
 ```
