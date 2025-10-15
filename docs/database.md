@@ -130,16 +130,43 @@
 ## DDL (Work-In-Progress)
 
 ```sql
-CREATE TYPE status AS ENUM('online', 'offline')
+CREATE TYPE USER_STATUS AS ENUM('online', 'offline');
 
-CREATE Table IF NOT EXISTS User (
+CREATE Table IF NOT EXISTS "User" (
     id INT PRIMARY KEY,
     username VARCHAR(16) NOT NULL UNIQUE,
     password_hash VARCHAR NOT NULL,
     email VARCHAR NOT NULL UNIQUE,
-    status STATUS NOT NULL,
+    status USER_STATUS NOT NULL,
     bio VARCHAR(128),
     avatar_url VARCHAR(128),
-    join_date DATETIME,
-)
+    join_date DATETIME NOT NULL
+);
+```
+
+```sql
+CREATE TABLE IF NOT EXISTS Comment (
+    id INT PRIMARY KEY,
+    creator_id INTEGER references "User" (id),
+    text VARCHAR(512),
+    media_url VARCHAR(128),
+    views INTEGER CHECK (views >= 0),
+    likes INTEGER CHECK (likes >= 0),
+    dislikes INTEGER CHECK (dislikes >= 0),
+    created_at DATETIME NOT NULL
+);
+```
+
+```sql
+CREATE TYPE MESSAGE_STATUS AS ENUM('readed', 'unreaded');
+
+CREATE TABLE IF NOT EXISTS PrivateMessage (
+    id INTEGER PRIMARY KEY,
+    sender_id INTEGER references "User" (id),
+    reciever_id INTEGER references "User" (id),
+    text VARCHAR(256),
+    status MESSAGE_STATUS NOT NULL,
+    media_url VARCHAR(128),
+    created_at DATETIME NOT NULL
+);
 ```
