@@ -12,7 +12,7 @@
 
 | Поле          | Тип                   | Обмеження                            |
 |---------------|-----------------------|--------------------------------------|
-| username      | VARCHAR(15)           | Унікальний, без спеціальних символів |
+| username      | UNIQUE VARCHAR(15)    | Унікальний, без спеціальних символів |
 | password_hash | VARCHAR               | Хеш паролю                           |
 | email         | VARCHAR               | Унікальний, у форматі пошти          |
 | status        | ENUM(online, offline) | Лише 'online' чи 'offline'           |
@@ -27,27 +27,27 @@
 - Редагування
 
 
-| Поле          | Тип               | Обмеження            |
-|---------------|-------------------|----------------------|
-| creator_id    | INT (Foreign Key) |                      |
-| title         | VARCHAR(32)       | Від 8 символів до 32 |
-| text          | VARCHAR(1024)     |                      |
-| likes         | INT UNSIGNED      | ≥ 0                  |
-| dislike       | INT UNSIGNED      | ≥ 0                  |
-| views         | INT UNSIGNED      | ≥ 0                  |
-| created_at    | DATETIME          |                      |
+| Поле          | Тип                         | Обмеження            |
+|---------------|-----------------------------|----------------------|
+| creator_id    | INT (Foreign Key)           |                      |
+| title         | VARCHAR(64)                 | До 64                |
+| text          | VARCHAR(1024)               |                      |
+| likes         | INT CHECK (likes >= 0)      | ≥ 0                  |
+| dislikes      | INT CHECK (dislikes >= 0)   | ≥ 0                  |
+| views         | INT CHECK (views >= 0)      | ≥ 0                  |
+| created_at    | DATETIME                    |                      |
 
 
 ### 3. Community
 - Підписатися
 - Редагувати bio
 
-| Поле          | Тип                         | Обмеження                            |
-|---------------|-----------------------------|--------------------------------------|
-| name          | VARCHAR(15) (Foreign Key)   | Унікальний, без спеціальних символів |
-| bio           | VARCHAR(512)                | Не більше 128 символів               |
-| avatar_url    | VARCHAR(128)                | Посилання на зображення              |
-| created_at    | DATETIME                    |                                      |
+| Поле          | Тип                                | Обмеження                            |
+|---------------|------------------------------------|--------------------------------------|
+| name          | UNIQUE VARCHAR(15)                 | Унікальний, без спеціальних символів |
+| bio           | VARCHAR(256)                       | Не більше 256 символів               |
+| avatar_url    | VARCHAR(128)                       | Посилання на зображення              |
+| created_at    | DATETIME                           |                                      |
 
 
 ### 4. Tag
@@ -80,15 +80,15 @@
 - Змінити
 - Видалити
 
-| Поле          | Тип               | Обмеження              |
-|---------------|-------------------|------------------------|
-| creator_id    | INT (Foreign Key) |                        |
-| text          | VARCHAR(512)      | Не більше 512 символів |
-| media_url     | VARCHAR(128)      | Посилання 128 символів |
-| views         | INT UNSIGNED      | ≥ 0                    |
-| likes         | INT UNSIGNED      | ≥ 0                    |
-| dislikes      | INT UNSIGNED      | ≥ 0                    |
-| created_at    | DATETIME          |                        |
+| Поле          | Тип                          | Обмеження              |
+|---------------|------------------------------|------------------------|
+| creator_id    | INT (Foreign Key)            |                        |
+| text          | VARCHAR(512)                 | Не більше 512 символів |
+| media_url     | VARCHAR(128)                 | Посилання 128 символів |
+| views         | INT CHECK (views >= 0)       | ≥ 0                    |
+| likes         | INT CHECK (likes >= 0)       | ≥ 0                    |
+| dislikes      | INT CHECK (dislikes >= 0)    | ≥ 0                    |
+| created_at    | DATETIME                     |                        |
 
 
 ### 5. Friendship
@@ -119,7 +119,6 @@
 
 | Поле          | Тип                                | Обмеження              |
 |---------------|------------------------------------|------------------------|
-| id            | INT                                |                        |
 | media_url     | VARCHAR(128)                       | Посилання 128 символів |
 | post_id       | INT (Foreign Key)                  |                        |
 
