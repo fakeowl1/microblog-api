@@ -140,7 +140,7 @@ CREATE Table IF NOT EXISTS "User" (
     status USER_STATUS NOT NULL,
     bio VARCHAR(128),
     avatar_url VARCHAR(128),
-    join_date DATETIME NOT NULL
+    join_date TIMESTAMP NOT NULL
 );
 ```
 
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS Comment (
     views INTEGER CHECK (views >= 0),
     likes INTEGER CHECK (likes >= 0),
     dislikes INTEGER CHECK (dislikes >= 0),
-    created_at DATETIME NOT NULL
+    created_at TIMESTAMP NOT NULL
 );
 ```
 
@@ -167,6 +167,17 @@ CREATE TABLE IF NOT EXISTS PrivateMessage (
     text VARCHAR(256),
     status MESSAGE_STATUS NOT NULL,
     media_url VARCHAR(128),
-    created_at DATETIME NOT NULL
+    created_at TIMESTAMP NOT NULL
+);
+```
+
+```sql
+CREATE TYPE FRIENDSHIP_STATUS AS ENUM('readed', 'unreaded');
+
+CREATE TABLE IF NOT EXISTS Friendship (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER references "User" (id),
+    followed_id INTEGER references "User" (id),
+    status FRIENDSHIP_STATUS NOT NULL
 );
 ```
