@@ -1,5 +1,3 @@
-# Work In Progress
-
 ## Сутності
 
 ### 1. User
@@ -14,7 +12,7 @@
 |---------------|-----------------------|--------------------------------------|
 | username      | UNIQUE VARCHAR(15)    | Унікальний, без спеціальних символів |
 | password_hash | VARCHAR               | Хеш паролю                           |
-| email         | VARCHAR               | Унікальний, у форматі пошти          |
+| email         | UNIQUE VARCHAR        | Унікальний, у форматі пошти          |
 | status        | ENUM(online, offline) | Лише 'online' чи 'offline'           |
 | bio           | VARCHAR(128)          | Не більше 128 символів               |
 | avatar_url    | VARCHAR(128)          | Посилання на зображення              |
@@ -128,3 +126,58 @@
 <p align="center">
     <img src='diagrams/diagram.jpg'/>
 </p>
+
+## DDL (Work-In-Progress)
+
+```sql
+CREATE TYPE USER_STATUS AS ENUM('online', 'offline');
+
+CREATE Table IF NOT EXISTS "User" (
+    id INT PRIMARY KEY,
+    username VARCHAR(16) NOT NULL UNIQUE,
+    password_hash VARCHAR NOT NULL,
+    email VARCHAR NOT NULL UNIQUE,
+    status USER_STATUS NOT NULL,
+    bio VARCHAR(128),
+    avatar_url VARCHAR(128),
+    join_date TIMESTAMP NOT NULL
+);
+```
+
+```sql
+CREATE TABLE IF NOT EXISTS Comment (
+    id INT PRIMARY KEY,
+    creator_id INTEGER references "User" (id),
+    text VARCHAR(512),
+    media_url VARCHAR(128),
+    views INTEGER CHECK (views >= 0),
+    likes INTEGER CHECK (likes >= 0),
+    dislikes INTEGER CHECK (dislikes >= 0),
+    created_at TIMESTAMP NOT NULL
+);
+```
+
+```sql
+CREATE TYPE MESSAGE_STATUS AS ENUM('readed', 'unreaded');
+
+CREATE TABLE IF NOT EXISTS PrivateMessage (
+    id INTEGER PRIMARY KEY,
+    sender_id INTEGER references "User" (id),
+    reciever_id INTEGER references "User" (id),
+    text VARCHAR(256),
+    status MESSAGE_STATUS NOT NULL,
+    media_url VARCHAR(128),
+    created_at TIMESTAMP NOT NULL
+);
+```
+
+```sql
+CREATE TYPE FRIENDSHIP_STATUS AS ENUM('readed', 'unreaded');
+
+CREATE TABLE IF NOT EXISTS Friendship (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER references "User" (id),
+    followed_id INTEGER references "User" (id),
+    status FRIENDSHIP_STATUS NOT NULL
+);
+```
