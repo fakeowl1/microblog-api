@@ -1,5 +1,3 @@
-# Work In Progress
-
 ## Сутності
 
 ### 1. User
@@ -14,7 +12,7 @@
 |---------------|-----------------------|--------------------------------------|
 | username      | UNIQUE VARCHAR(15)    | Унікальний, без спеціальних символів |
 | password_hash | VARCHAR               | Хеш паролю                           |
-| email         | VARCHAR               | Унікальний, у форматі пошти          |
+| email         | UNIQUE VARCHAR        | Унікальний, у форматі пошти          |
 | status        | ENUM(online, offline) | Лише 'online' чи 'offline'           |
 | bio           | VARCHAR(128)          | Не більше 128 символів               |
 | avatar_url    | VARCHAR(128)          | Посилання на зображення              |
@@ -128,3 +126,20 @@
 <p align="center">
     <img src='diagrams/diagram.jpg'/>
 </p>
+
+## DDL (Work-In-Progress)
+
+```sql
+CREATE TYPE status AS ENUM('online', 'offline')
+
+CREATE Table IF NOT EXISTS User (
+    id INT PRIMARY KEY,
+    username VARCHAR(16) NOT NULL UNIQUE,
+    password_hash VARCHAR NOT NULL,
+    email VARCHAR NOT NULL UNIQUE,
+    status STATUS NOT NULL,
+    bio VARCHAR(128),
+    avatar_url VARCHAR(128),
+    join_date DATETIME,
+)
+```
