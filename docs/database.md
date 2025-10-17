@@ -133,7 +133,7 @@
 CREATE TYPE USER_STATUS AS ENUM('online', 'offline');
 
 CREATE Table IF NOT EXISTS "User" (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     username VARCHAR(16) NOT NULL UNIQUE,
     password_hash VARCHAR NOT NULL,
     email VARCHAR NOT NULL UNIQUE,
@@ -146,7 +146,7 @@ CREATE Table IF NOT EXISTS "User" (
 
 ```sql
 CREATE TABLE IF NOT EXISTS Comment (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     creator_id INTEGER references "User" (id),
     text VARCHAR(512),
     media_url VARCHAR(128),
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS Comment (
 CREATE TYPE MESSAGE_STATUS AS ENUM('readed', 'unreaded');
 
 CREATE TABLE IF NOT EXISTS PrivateMessage (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     sender_id INTEGER references "User" (id),
     reciever_id INTEGER references "User" (id),
     text VARCHAR(256),
