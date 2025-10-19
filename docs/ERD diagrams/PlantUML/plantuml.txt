@@ -1,0 +1,100 @@
+@startuml
+hide circle
+
+entity "User" as User {
+  *id: INT
+  --
+  username: VARCHAR(15)
+  email: VARCHAR
+  password_hash: VARCHAR
+  bio: VARCHAR(128)
+  status: ENUM(online, offline)
+  avatar_url: VARCHAR(128)
+  join_date: DATETIME
+}
+
+entity "Comment" as Comment {
+  *id: INT
+  --
+  creator_id: INT (FK)
+  post_id: INT (FK)
+  text: VARCHAR(256)
+  likes: INT
+  dislikes: INT
+  views: INT
+  created_at: DATETIME
+}
+
+entity "Post" as Post {
+  *id: INT
+  --
+  creator_id: INT (FK)
+  title: VARCHAR(32)
+  text: VARCHAR(1024)
+  likes: INT
+  dislikes: INT
+  views: INT
+  created_at: DATETIME
+}
+
+entity "Tag" as Tag {
+  *id: INT
+  --
+  post_id: INT (FK)
+  name: VARCHAR(32)
+}
+
+entity "PostMedia" as PostMedia {
+  *id: INT
+  --
+  media_url: VARCHAR(128)
+  post_id: INT (FK)
+}
+
+entity "Community" as Community {
+  *id: INT
+  --
+  name: VARCHAR(15)
+  bio: VARCHAR(512)
+  avatar_url: VARCHAR(128)
+  created_at: DATETIME
+}
+
+entity "CommunitySubscription" as CommunitySubscription {
+  *id: INT
+  --
+  community_id: INT (FK)
+  user_id: INT (FK)
+}
+
+entity "Friendship" as Friendship {
+  *id: INT
+  --
+  user_id: INT (FK)
+  followed_id: INT (FK)
+  status: ENUM(pending, accepted, rejected)
+}
+
+entity "PrivateMessage" as PrivateMessage {
+  *id: INT
+  --
+  sender_id: INT (FK)
+  reciever_id: INT (FK)
+  text: VARCHAR
+  media_url: VARCHAR
+  status: ENUM(readed, unreaded)
+}
+
+Post --o{ Tag : has
+Post --o{ Comment
+Post --o{ PostMedia: contains
+User --o{ Post: created by
+
+User --o{ CommunitySubscription: subscribed
+Community ||--o{ CommunitySubscription
+
+User --o{ PrivateMessage: writed by
+
+User }o--o{ User : Friendship
+
+@enduml
