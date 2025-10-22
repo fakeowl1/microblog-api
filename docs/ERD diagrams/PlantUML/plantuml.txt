@@ -56,7 +56,7 @@ entity "PostMedia" as PostMedia {
 entity "Community" as Community {
   *id: INT
   --
-  name: VARCHAR(32)
+  name: UNIQUE VARCHAR(32)
   bio: VARCHAR(512)
   avatar_url: VARCHAR(128)
   created_at: DATETIME
