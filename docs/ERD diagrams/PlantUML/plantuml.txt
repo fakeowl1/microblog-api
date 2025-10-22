@@ -1,10 +1,11 @@
 @startuml
 hide circle
+!theme plain
 
 entity "User" as User {
   *id: INT
   --
-  username: VARCHAR(15)
+  username: VARCHAR(32)
   email: VARCHAR
   password_hash: VARCHAR
   bio: VARCHAR(128)
@@ -18,10 +19,11 @@ entity "Comment" as Comment {
   --
   creator_id: INT (FK)
   post_id: INT (FK)
-  text: VARCHAR(256)
+  text: VARCHAR(512)
+  media_url: VARCHAR(128)
+  views: INT
   likes: INT
   dislikes: INT
-  views: INT
   created_at: DATETIME
 }
 
@@ -54,7 +56,7 @@ entity "PostMedia" as PostMedia {
 entity "Community" as Community {
   *id: INT
   --
-  name: VARCHAR(15)
+  name: VARCHAR(32)
   bio: VARCHAR(512)
   avatar_url: VARCHAR(128)
   created_at: DATETIME
@@ -80,21 +82,29 @@ entity "PrivateMessage" as PrivateMessage {
   --
   sender_id: INT (FK)
   reciever_id: INT (FK)
-  text: VARCHAR
+  text: VARCHAR(256)
   media_url: VARCHAR
   status: ENUM(readed, unreaded)
 }
 
+'One-To-Many
 Post --o{ Tag : has
+
+'One-To-Many
 Post --o{ Comment
-Post --o{ PostMedia: contains
-User --o{ Post: created by
+
+'One-to-Many
+Post --o{ PostMedia
+
+User ||--o{ Post: created by
+User ||--o{ Comment: created by
 
 User --o{ CommunitySubscription: subscribed
 Community ||--o{ CommunitySubscription
 
-User --o{ PrivateMessage: writed by
-
 User }o--o{ User : Friendship
+
+User ||--o{ PrivateMessage: sent by (sender)
+User ||--o{ PrivateMessage: received by (receiver)
 
 @enduml
