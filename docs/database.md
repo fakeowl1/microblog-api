@@ -28,7 +28,7 @@
 | Поле          | Тип                         | Обмеження            |
 |---------------|-----------------------------|----------------------|
 | creator_id    | INT (Foreign Key)           |                      |
-| title         | VARCHAR(32)                 | До 64                |
+| title         | VARCHAR(32)                 | До 32                |
 | text          | VARCHAR(1024)               |                      |
 | likes         | INT CHECK (likes >= 0)      | ≥ 0                  |
 | dislikes      | INT CHECK (dislikes >= 0)   | ≥ 0                  |
@@ -97,7 +97,7 @@
 | Поле          | Тип                                | Обмеження                                | 
 |---------------|------------------------------------|------------------------------------------|
 | user_id       | INT (Foreign Key)                  |                                          |
-| followed_id   | INT (Foreign Key)                  |                                          |
+| friended_id   | INT (Foreign Key)                  |                                          |
 | status        | ENUM(pending, accepted, rejected)  | Лише 'pending' чи 'accepted', 'rejected' |
 
 
@@ -134,7 +134,7 @@ CREATE TYPE USER_STATUS AS ENUM('online', 'offline');
 
 CREATE Table IF NOT EXISTS "User" (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(16) NOT NULL UNIQUE,
+    username VARCHAR(32) NOT NULL UNIQUE,
     password_hash VARCHAR NOT NULL,
     email VARCHAR NOT NULL UNIQUE,
     status USER_STATUS NOT NULL,
@@ -148,6 +148,7 @@ CREATE Table IF NOT EXISTS "User" (
 CREATE TABLE IF NOT EXISTS Comment (
     id SERIAL PRIMARY KEY,
     creator_id INTEGER references "User" (id),
+    post_id INTEGER references "Post" (id),
     text VARCHAR(512),
     media_url VARCHAR(128),
     views INTEGER CHECK (views >= 0),
@@ -172,11 +173,11 @@ CREATE TABLE IF NOT EXISTS PrivateMessage (
 ```
 
 ```sql
-CREATE TYPE FRIENDSHIP_STATUS AS ENUM('readed', 'unreaded');
+CREATE TYPE FRIENDSHIP_STATUS AS ENUM('pending', 'accepted' 'rejected');
 
 CREATE TABLE IF NOT EXISTS Friendship (
     user_id INTEGER references "User" (id),
-    followed_id INTEGER references "User" (id),
+    friended_id INTEGER references "User" (id),
     status FRIENDSHIP_STATUS NOT NULL,
     PRIMARY KEY (user_id, followed_id)
 );
