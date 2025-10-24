@@ -179,6 +179,6 @@ CREATE TABLE IF NOT EXISTS Friendship (
     user_id INTEGER references "User" (id),
     friended_id INTEGER references "User" (id),
     status FRIENDSHIP_STATUS NOT NULL,
-    PRIMARY KEY (user_id, followed_id)
+    PRIMARY KEY (user_id, friended_id)
 );
 ```
