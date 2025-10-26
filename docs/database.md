@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS Comment (
     views INTEGER CHECK (views >= 0),
     likes INTEGER CHECK (likes >= 0),
     dislikes INTEGER CHECK (dislikes >= 0),
-    created_at TIMESTAMP NOT NULL
+    created_at TIMESTAMP NOT NULL,
 );
 ```
 
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS PrivateMessage (
     text VARCHAR(256),
     status MESSAGE_STATUS NOT NULL,
     media_url VARCHAR(128),
-    created_at TIMESTAMP NOT NULL
+    created_at TIMESTAMP NOT NULL,
 );
 ```
 
