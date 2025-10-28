@@ -160,7 +160,7 @@ CREATE Table IF NOT EXISTS "User" (
 ```sql
 CREATE TABLE IF NOT EXISTS Post (
     id SERIAL PRIMARY KEY,
-    creator_id INT REFERENCES "User"(id) ON DELETE CASCADE,
+    creator_id INT REFERENCES "User"(id),
     title VARCHAR(32),
     text VARCHAR(1024),
     likes INT DEFAULT 0 CHECK (likes >= 0),
@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS Community (
 ```sql
 CREATE TABLE IF NOT EXISTS Tag (
     id SERIAL PRIMARY KEY,
-    post_id INT REFERENCES Post(id) ON DELETE CASCADE,
+    post_id INT REFERENCES Post(id),
     name VARCHAR(32)
 );
 ```
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS Tag (
 CREATE TABLE IF NOT EXISTS PostMedia (
     id SERIAL PRIMARY KEY,
     media_url VARCHAR(128),
-    post_id INT REFERENCES Post(id) ON DELETE CASCADE
+    post_id INT REFERENCES Post(id)
 );
 ```
 
@@ -228,8 +228,8 @@ CREATE TABLE IF NOT EXISTS PrivateMessage (
 CREATE TYPE FRIENDSHIP_STATUS AS ENUM('pending', 'accepted', 'rejected');
 
 CREATE TABLE IF NOT EXISTS Friendship (
-    user_id INTEGER references "User" (id) ON DELETE CASCADE,
-    friended_id INTEGER references "User" (id) ON DELETE CASCADE,
+    user_id INTEGER references "User" (id),
+    friended_id INTEGER references "User" (id),
     status FRIENDSHIP_STATUS NOT NULL,
     PRIMARY KEY (user_id, friended_id)
 );
@@ -238,8 +238,8 @@ CREATE TABLE IF NOT EXISTS Friendship (
 ```sql
 CREATE TABLE IF NOT EXISTS CommunitySubscription (
     id SERIAL PRIMARY KEY,
-    community_id INT REFERENCES Community(id) ON DELETE CASCADE,
-    user_id INT REFERENCES "User"(id) ON DELETE CASCADE
+    community_id INT REFERENCES Community(id),
+    user_id INT REFERENCES "User"(id)
 );
 ```
 
