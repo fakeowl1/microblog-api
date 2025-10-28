@@ -140,11 +140,6 @@
 
 
 
-## ER-діаграма
-<p align="center">
-    <img src='diagrams/diagram.jpg'/>
-</p>
-
 ## DDL (Work-In-Progress)
 
 ```sql
@@ -159,6 +154,19 @@ CREATE Table IF NOT EXISTS "User" (
     bio VARCHAR(128),
     avatar_url VARCHAR(128),
     join_date TIMESTAMP NOT NULL
+);
+```
+
+```sql
+CREATE TABLE IF NOT EXISTS Post (
+    id SERIAL PRIMARY KEY,
+    creator_id INT REFERENCES "User"(id) ON DELETE CASCADE,
+    title VARCHAR(32),
+    text VARCHAR(1024),
+    likes INT DEFAULT 0 CHECK (likes >= 0),
+    dislikes INT DEFAULT 0 CHECK (dislikes >= 0),
+    views INT DEFAULT 0 CHECK (views >= 0),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
