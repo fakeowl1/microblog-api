@@ -285,3 +285,36 @@ VALUES
 (2, 'https://example.com/media/student_day.png'),
 (3, 'https://example.com/media/botanic_garden.jpg');
 ```
+
+```sql
+INSERT INTO PrivateMessage (sender_id, receiver_id, text, status, media_url, created_at)
+VALUES
+(1, 2, 'Мені здається, ми спеціальності', 'readed', NULL, '2025-05-12'),
+(1, 2, 'сплутали', 'readed', NULL, '2025-05-12'),
+(2, 3, 'треба було йти на філософію', 'unreaded', NULL, '2025-05-13');
+```
+
+```sql
+INSERT INTO Comment (creator_id, post_id, text, media_url, views, likes, dislikes, created_at)
+VALUES
+(2, 1, 'Яка краса! Бувала там, дійсно чарівна місцина', 10, 4, 0, '2025-05-12'),
+(3, 1, 'Боже як це гарно',3, 3, 0, '2025-05-13'),
+(1, 2, 'Вау, яка ж краса...', 8, 6, 0, '2025-05-14');
+```
+
+```sql
+INSERT INTO Friendship (user_id, friended_id, status)
+VALUES
+(1, 2, 'accepted'),
+(2, 3, 'pending'),
+(3, 1, 'accepted');
+```
+
+```sql
+INSERT INTO CommunitySubscription (community_id, user_id)
+VALUES
+(1, 1),
+(1, 2),
+(2, 2),
+(2, 3);
+```
