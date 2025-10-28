@@ -153,7 +153,7 @@ CREATE Table IF NOT EXISTS Member (
     status USER_STATUS NOT NULL,
     bio VARCHAR(128),
     avatar_url VARCHAR(128),
-    join_date TIMESTAMP NOT NULL
+    join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS Comment (
     views INTEGER CHECK (views >= 0),
     likes INTEGER CHECK (likes >= 0),
     dislikes INTEGER CHECK (dislikes >= 0),
-    created_at TIMESTAMP NOT NULL
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
@@ -220,7 +220,7 @@ CREATE TABLE IF NOT EXISTS PrivateMessage (
     text VARCHAR(512),
     status MESSAGE_STATUS NOT NULL,
     media_url VARCHAR(128),
-    created_at TIMESTAMP NOT NULL
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 );
 ```
 
