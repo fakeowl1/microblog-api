@@ -273,9 +273,9 @@ INSERT INTO Tag (post_id, name)
 VALUES
 (1, 'вступ'),
 (2, 'студентське_життя'),
-(3, 'тиша'),
-(4, 'nature');
+(3, 'тиша');
 ```
+
 
 ```sql
 INSERT INTO PostMedia (post_id, media_url)
@@ -284,6 +284,7 @@ VALUES
 (2, 'https://example.com/media/student_day.png'),
 (3, 'https://example.com/media/botanic_garden.jpg');
 ```
+
 
 ```sql
 INSERT INTO PrivateMessage (sender_id, receiver_id, text, status, media_url, created_at)
@@ -294,7 +295,7 @@ VALUES
 ```
 
 ```sql
-INSERT INTO Comment (creator_id, post_id, text, media_url, views, likes, dislikes, created_at)
+INSERT INTO Comment (creator_id, post_id, text, views, likes, dislikes, created_at)
 VALUES
 (2, 1, 'Яка краса! Бувала там, дійсно чарівна місцина', 10, 4, 0, '2025-05-12'),
 (3, 1, 'Боже як це гарно',3, 3, 0, '2025-05-13'),
