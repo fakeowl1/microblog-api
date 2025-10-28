@@ -189,6 +189,14 @@ CREATE TABLE IF NOT EXISTS Community (
 ```
 
 ```sql
+    CREATE TABLE IF NOT EXISTS PostMedia (
+    id SERIAL PRIMARY KEY,
+    media_url VARCHAR(128),
+    post_id INT REFERENCES Post(id) ON DELETE CASCADE,
+);
+```
+
+```sql
 CREATE TABLE IF NOT EXISTS Comment (
     id SERIAL PRIMARY KEY,
     creator_id INTEGER references "User" (id),
