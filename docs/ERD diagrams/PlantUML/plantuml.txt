@@ -12,7 +12,7 @@ entity "User" as User {
   bio: VARCHAR(128)
   status: ENUM(online, offline)
   avatar_url: VARCHAR(128)
-  join_date: DATETIME
+  join_date: TIMESTAMP 
 }
 
 entity "Comment" as Comment {
@@ -25,7 +25,7 @@ entity "Comment" as Comment {
   views: INT
   likes: INT
   dislikes: INT
-  created_at: DATETIME
+  created_at: TIMESTAMP
 }
 
 entity "Post" as Post {
@@ -37,7 +37,7 @@ entity "Post" as Post {
   likes: INT
   dislikes: INT
   views: INT
-  created_at: DATETIME
+  created_at: TIMESTAMP
 }
 
 entity "Tag" as Tag {
@@ -60,7 +60,7 @@ entity "Community" as Community {
   name: VARCHAR(32)
   bio: VARCHAR(512)
   avatar_url: VARCHAR(128)
-  created_at: DATETIME
+  created_at: TIMESTAMP
 }
 
 entity "CommunitySubscription" as CommunitySubscription {
@@ -86,6 +86,7 @@ entity "PrivateMessage" as PrivateMessage {
   text: VARCHAR(512)
   media_url: VARCHAR(128)
   status: ENUM(readed, unreaded)
+  created_at: TIMESTAMP
 }
 
 'One-To-Many
