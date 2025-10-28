@@ -249,9 +249,9 @@ CREATE TABLE IF NOT EXISTS CommunitySubscription (
 
 ```sql
 INSERT INTO "User" (username, password_hash, email, status, bio, avatar_url, join_date)
-VALUES ('Phoenix', '$2y$10$GP', 'phoenix@example.com', 'offline', 'student of KPI', 'https://c331bff0b.jpg', '2025-05-11'),
-('Bettie', 'jmizKk4S', 'bettie@example.com', 'online', 'Цікавлюсь наукою', 'https://c335956883.jpg', '2025-03-10'),
-('Joker', '123Kk56', 'joker@example.com', 'online', 'Adventurer, explorer, daydreamer', 'https://d33595683.jpg', '2025-10-10');
+VALUES ('Phoenix', '345587b2c6a6e9bf4c399fffaf007aca06fc3f02775d06e552db9d7cd5fe6225', 'phoenix@example.com', 'offline', 'student of KPI', 'https://c331bff0b.jpg', '2025-05-11'),
+('Bettie', '5335f44e899c9179626fad9e11e5c42ea245e680a644787ded59efa3', 'bettie@example.com', 'online', 'Цікавлюсь наукою', 'https://c335956883.jpg', '2025-03-10'),
+('Joker', '55fb7ff091de8790195132ccf08cc90eab52bfab3c9d85c17583800011a33c55', 'joker@example.com', 'online', 'Adventurer, explorer, daydreamer', 'https://d33595683.jpg', '2025-10-10');
 ```
 
 ```sql
