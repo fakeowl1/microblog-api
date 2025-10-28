@@ -261,3 +261,27 @@ VALUES
 (2, 'День з життя студента', 'Для когось мрія. А для когось реальність ...', 25, 0, 320, '2025-05-14'),
 (3, 'Краса навколо нас', 'Всі бігом в Ботсад! Мабуть єдиний сонячний день', 75, 0, 110, '2025-09-15');
 ```
+
+```sql
+INSERT INTO Community (name, bio, avatar_url, created_at)
+VALUES
+('microbloggers', 'Спільнота людей, які діляться думками кожного дня.', 'https://example.com.png', '2025-03-01'),
+('smm_learners', 'Для тих, хто вивчає SMM та хоче просувати бренди.', 'https://example.com.jpg', '2025-03-15');
+```
+
+```sql
+INSERT INTO Tag (post_id, name)
+VALUES
+(1, 'вступ'),
+(2, 'студентське_життя'),
+(3, 'тиша'),
+(4, 'nature');
+```
+
+```sql
+INSERT INTO PostMedia (post_id, media_url)
+VALUES
+(1, 'https://example.com/media/first_post.jpg'),
+(2, 'https://example.com/media/student_day.png'),
+(3, 'https://example.com/media/botanic_garden.jpg');
+```
