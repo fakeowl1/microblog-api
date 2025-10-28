@@ -171,6 +171,16 @@ CREATE TABLE IF NOT EXISTS Post (
 ```
 
 ```sql
+CREATE TABLE IF NOT EXISTS Community (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(32) UNIQUE NOT NULL,
+    bio VARCHAR(512),
+    avatar_url VARCHAR(128),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+```sql
 CREATE TABLE IF NOT EXISTS Comment (
     id SERIAL PRIMARY KEY,
     creator_id INTEGER references "User" (id),
