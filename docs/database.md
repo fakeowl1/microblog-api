@@ -181,6 +181,14 @@ CREATE TABLE IF NOT EXISTS Community (
 ```
 
 ```sql
+    CREATE TABLE IF NOT EXISTS Tag (
+    id SERIAL PRIMARY KEY,
+    post_id INT REFERENCES Post(id) ON DELETE CASCADE,
+    name VARCHAR(32)
+);
+```
+
+```sql
 CREATE TABLE IF NOT EXISTS Comment (
     id SERIAL PRIMARY KEY,
     creator_id INTEGER references "User" (id),
