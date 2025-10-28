@@ -16,7 +16,7 @@
 | status        | ENUM(online, offline) | Лише 'online' чи 'offline'           |
 | bio           | VARCHAR(128)          | Не більше 128 символів               |
 | avatar_url    | VARCHAR(128)          | Посилання на зображення              |
-| join_date     | DATETIME              |                                      |
+| join_date     | TIMESTAMP             |                                      |
 
 
 ### 2. Post
@@ -33,7 +33,7 @@
 | likes         | INT CHECK (likes >= 0)      | ≥ 0                  |
 | dislikes      | INT CHECK (dislikes >= 0)   | ≥ 0                  |
 | views         | INT CHECK (views >= 0)      | ≥ 0                  |
-| created_at    | DATETIME                    |                      |
+| created_at    | TIMESTAMP                    |                      |
 
 
 ### 3. Community
@@ -43,9 +43,9 @@
 | Поле          | Тип                                | Обмеження                            |
 |---------------|------------------------------------|--------------------------------------|
 | name          | UNIQUE VARCHAR(32)                 | Унікальний, без спеціальних символів |
-| bio           | VARCHAR(256)                       | Не більше 256 символів               |
+| bio           | VARCHAR(512)                       | Не більше 512 символів               |
 | avatar_url    | VARCHAR(128)                       | Посилання на зображення              |
-| created_at    | DATETIME                           |                                      |
+| created_at    | TIMESTAMP                          |                                      |
 
 
 ### 4. Tag
@@ -57,7 +57,18 @@
 | name          | VARCHAR(32)       | До 32 символів    |
 
 
-### 5. PrivateMessage
+### 5. PostMedia
+- Створення
+- Видалення
+- Редагування
+
+| Поле          | Тип                         | Обмеження            |
+|---------------|-----------------------------|----------------------|
+| post_id       | INT (Foreign Key)           |                      |
+| media_url     | VARCHAR(128)                | До 128               |
+
+
+### 6. PrivateMessage
 - Надіслати користовачу
 - Редагувати
 - Видалити
@@ -67,13 +78,13 @@
 |---------------|------------------------|------------------------------|
 | sender_id     | INT (Foreign Key)      |                              |
 | receiver_id   | INT (Foreign Key)      |                              |
-| text          | VARCHAR(256)           | До 256                       |
+| text          | VARCHAR(512)           | До 512                       |
 | status        | ENUM(readed, unreaded) | Лише 'readed' чи 'unreaded'  |
 | media_url     | VARCHAR(128)           |                              |
-| created_at    | DATETIME               |                              |
+| created_at    | TIMESTAMP              |                              |
 
 
-### 4. Comment
+### 7. Comment
 - Додати під публікацією
 - Змінити
 - Видалити
@@ -81,15 +92,16 @@
 | Поле          | Тип                          | Обмеження              |
 |---------------|------------------------------|------------------------|
 | creator_id    | INT (Foreign Key)            |                        |
+| post_id       | INT (Foreign Key)            |                        |
 | text          | VARCHAR(512)                 | До 512 символів        |
 | media_url     | VARCHAR(128)                 | До 128 символів        |
 | views         | INT CHECK (views >= 0)       | ≥ 0                    |
 | likes         | INT CHECK (likes >= 0)       | ≥ 0                    |
 | dislikes      | INT CHECK (dislikes >= 0)    | ≥ 0                    |
-| created_at    | DATETIME                     |                        |
+| created_at    | TIMESTAMP                    |                        |
 
 
-### 5. Friendship
+### 8. Friendship
 - Надіслати запит
 - Прийняти запит 
 - Відхилити запит
@@ -101,7 +113,7 @@
 | status        | ENUM(pending, accepted, rejected)  | Лише 'pending' чи 'accepted', 'rejected' |
 
 
-### 6. CommunitySubscription
+### 9. CommunitySubscription
 - Підписатися
 - Відписатися
 
@@ -109,16 +121,6 @@
 |---------------|------------------------------------|------------------------|
 | community_id  | INT (Foreign Key)                  |                        |
 | user_id       | INT (Foreign Key)                  |                        |
-
-
-### 7. PostMedia
-- Додати медіа до публікації
-- Видалити медіа
-
-| Поле          | Тип                                | Обмеження           |
-|---------------|------------------------------------|---------------------|
-| media_url     | VARCHAR(128)                       | До 128 символів     |
-| post_id       | INT (Foreign Key)                  |                     |
 
 
 
