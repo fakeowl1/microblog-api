@@ -1,6 +1,6 @@
 ## Сутності
 
-### 1. User
+### 1. Member
 - Реєстрація
 - Автентифікація
 - Редагування
@@ -145,7 +145,7 @@
 ```sql
 CREATE TYPE USER_STATUS AS ENUM('online', 'offline');
 
-CREATE Table IF NOT EXISTS "User" (
+CREATE Table IF NOT EXISTS Member (
     id SERIAL PRIMARY KEY,
     username VARCHAR(32) NOT NULL UNIQUE,
     password_hash VARCHAR NOT NULL,
@@ -160,7 +160,7 @@ CREATE Table IF NOT EXISTS "User" (
 ```sql
 CREATE TABLE IF NOT EXISTS Post (
     id SERIAL PRIMARY KEY,
-    creator_id INT REFERENCES "User"(id),
+    creator_id INT REFERENCES Member(id),
     title VARCHAR(32),
     text VARCHAR(1024),
     likes INT DEFAULT 0 CHECK (likes >= 0),
@@ -199,8 +199,8 @@ CREATE TABLE IF NOT EXISTS PostMedia (
 ```sql
 CREATE TABLE IF NOT EXISTS Comment (
     id SERIAL PRIMARY KEY,
-    creator_id INTEGER references "User" (id),
-    post_id INTEGER references "Post" (id),
+    creator_id INTEGER references Member(id),
+    post_id INTEGER references Post(id),
     text VARCHAR(512),
     media_url VARCHAR(128),
     views INTEGER CHECK (views >= 0),
@@ -215,8 +215,8 @@ CREATE TYPE MESSAGE_STATUS AS ENUM('readed', 'unreaded');
 
 CREATE TABLE IF NOT EXISTS PrivateMessage (
     id SERIAL PRIMARY KEY,
-    sender_id INTEGER references "User" (id),
-    receiver_id INTEGER references "User" (id),
+    sender_id INTEGER references Member(id),
+    receiver_id INTEGER references Member(id),
     text VARCHAR(512),
     status MESSAGE_STATUS NOT NULL,
     media_url VARCHAR(128),
@@ -228,8 +228,8 @@ CREATE TABLE IF NOT EXISTS PrivateMessage (
 CREATE TYPE FRIENDSHIP_STATUS AS ENUM('pending', 'accepted', 'rejected');
 
 CREATE TABLE IF NOT EXISTS Friendship (
-    user_id INTEGER references "User" (id),
-    friended_id INTEGER references "User" (id),
+    user_id INTEGER references Member(id),
+    friended_id INTEGER references Member(id),
     status FRIENDSHIP_STATUS NOT NULL,
     PRIMARY KEY (user_id, friended_id)
 );
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS Friendship (
 CREATE TABLE IF NOT EXISTS CommunitySubscription (
     id SERIAL PRIMARY KEY,
     community_id INT REFERENCES Community(id),
-    user_id INT REFERENCES "User"(id)
+    user_id INT REFERENCES Member(id)
 );
 ```
 
@@ -248,7 +248,7 @@ CREATE TABLE IF NOT EXISTS CommunitySubscription (
 ## Insert Data
 
 ```sql
-INSERT INTO "User" (username, password_hash, email, status, bio, avatar_url, join_date)
+INSERT INTO Member (username, password_hash, email, status, bio, avatar_url, join_date)
 VALUES ('Phoenix', '345587b2c6a6e9bf4c399fffaf007aca06fc3f02775d06e552db9d7cd5fe6225', 'phoenix@example.com', 'offline', 'student of KPI', 'https://c331bff0b.jpg', '2025-05-11'),
 ('Bettie', '5335f44e899c9179626fad9e11e5c42ea245e680a644787ded59efa3', 'bettie@example.com', 'online', 'Цікавлюсь наукою', 'https://c335956883.jpg', '2025-03-10'),
 ('Joker', '55fb7ff091de8790195132ccf08cc90eab52bfab3c9d85c17583800011a33c55', 'joker@example.com', 'online', 'Adventurer, explorer, daydreamer', 'https://d33595683.jpg', '2025-10-10');
