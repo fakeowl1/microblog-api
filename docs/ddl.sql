@@ -5,7 +5,7 @@ CREATE Table IF NOT EXISTS Member (
     username VARCHAR(32) NOT NULL UNIQUE,
     password_hash VARCHAR NOT NULL,
     email VARCHAR NOT NULL UNIQUE,
-    status USER_STATUS NOT NULL,
+    status USER_STATUS DEFAULT 'online',
     bio VARCHAR(128),
     avatar_url VARCHAR(128),
     join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
