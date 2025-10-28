@@ -140,7 +140,7 @@
 
 
 
-## DDL (Work-In-Progress)
+## DDL
 
 ```sql
 CREATE TYPE USER_STATUS AS ENUM('online', 'offline');
@@ -241,4 +241,23 @@ CREATE TABLE IF NOT EXISTS CommunitySubscription (
     community_id INT REFERENCES Community(id) ON DELETE CASCADE,
     user_id INT REFERENCES "User"(id) ON DELETE CASCADE
 );
+```
+
+
+
+## Insert Data
+
+```sql
+INSERT INTO "User" (username, password_hash, email, status, bio, avatar_url, join_date)
+VALUES ('Phoenix', '$2y$10$GP', 'phoenix@example.com', 'offline', 'student of KPI', 'https://c331bff0b.jpg', '2025-05-11'),
+('Bettie', 'jmizKk4S', 'bettie@example.com', 'online', 'Цікавлюсь наукою', 'https://c335956883.jpg', '2025-03-10'),
+('Joker', '123Kk56', 'joker@example.com', 'online', 'Adventurer, explorer, daydreamer', 'https://d33595683.jpg', '2025-10-10');
+```
+
+```sql
+INSERT INTO Post (creator_id, title, text, likes, dislikes, views, created_at)
+VALUES 
+(1, 'Мій перший пост', 'Всім привіт! Нарешті створив свій перший мікроблог.', 12, 1, 140, '2025-05-12'),
+(2, 'День з життя студента', 'Для когось мрія. А для когось реальність ...', 25, 0, 320, '2025-05-14'),
+(3, 'Краса навколо нас', 'Всі бігом в Ботсад! Мабуть єдиний сонячний день', 75, 0, 110, '2025-09-15');
 ```
