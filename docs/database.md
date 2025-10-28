@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS Community (
     CREATE TABLE IF NOT EXISTS PostMedia (
     id SERIAL PRIMARY KEY,
     media_url VARCHAR(128),
-    post_id INT REFERENCES Post(id) ON DELETE CASCADE,
+    post_id INT REFERENCES Post(id) ON DELETE CASCADE
 );
 ```
 
@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS Comment (
     views INTEGER CHECK (views >= 0),
     likes INTEGER CHECK (likes >= 0),
     dislikes INTEGER CHECK (dislikes >= 0),
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL
 );
 ```
 
@@ -216,21 +216,29 @@ CREATE TYPE MESSAGE_STATUS AS ENUM('readed', 'unreaded');
 CREATE TABLE IF NOT EXISTS PrivateMessage (
     id SERIAL PRIMARY KEY,
     sender_id INTEGER references "User" (id),
-    reciever_id INTEGER references "User" (id),
-    text VARCHAR(256),
+    receiver_id INTEGER references "User" (id),
+    text VARCHAR(512),
     status MESSAGE_STATUS NOT NULL,
     media_url VARCHAR(128),
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL
 );
 ```
 
 ```sql
-CREATE TYPE FRIENDSHIP_STATUS AS ENUM('pending', 'accepted' 'rejected');
+CREATE TYPE FRIENDSHIP_STATUS AS ENUM('pending', 'accepted', 'rejected');
 
 CREATE TABLE IF NOT EXISTS Friendship (
-    user_id INTEGER references "User" (id),
-    friended_id INTEGER references "User" (id),
+    user_id INTEGER references "User" (id) ON DELETE CASCADE,
+    friended_id INTEGER references "User" (id) ON DELETE CASCADE,
     status FRIENDSHIP_STATUS NOT NULL,
     PRIMARY KEY (user_id, friended_id)
+);
+```
+
+```sql
+CREATE TABLE IF NOT EXISTS CommunitySubscription (
+    id SERIAL PRIMARY KEY,
+    community_id INT REFERENCES Community(id) ON DELETE CASCADE,
+    user_id INT REFERENCES "User"(id) ON DELETE CASCADE
 );
 ```
