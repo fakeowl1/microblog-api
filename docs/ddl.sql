@@ -22,6 +22,14 @@ CREATE TABLE IF NOT EXISTS Post (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS Community (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(32) UNIQUE,
+    bio VARCHAR(512),
+    avatar_url VARCHAR(128),
+    created_at TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS Tag (
     id SERIAL PRIMARY KEY,
     post_id INT REFERENCES Post (id),
@@ -30,8 +38,8 @@ CREATE TABLE IF NOT EXISTS Tag (
 
 CREATE TABLE IF NOT EXISTS PostMedia (
     id SERIAL PRIMARY KEY,
-    media_url VARCHAR(128),
-    post_id INT REFERENCES Post (id)
+    post_id INT REFERENCES Post (id),
+    media_url VARCHAR(128)
 );
 
 CREATE TABLE IF NOT EXISTS Comment (
