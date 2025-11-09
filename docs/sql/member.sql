@@ -1,7 +1,7 @@
 -- Create a Member table
 CREATE TYPE USER_STATUS AS ENUM('online', 'offline');
 
-CREATE Table IF NOT EXISTS Member (
+CREATE TABLE IF NOT EXISTS Member (
     id SERIAL PRIMARY KEY,
     username VARCHAR(32) NOT NULL UNIQUE,
     password_hash VARCHAR NOT NULL,
