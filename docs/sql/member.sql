@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS Member (
     password_hash VARCHAR NOT NULL,
     email VARCHAR NOT NULL UNIQUE,
     status USER_STATUS DEFAULT 'online',
-    bio VARCHAR(128),
-    avatar_url VARCHAR(128),
+    bio VARCHAR(256),
+    avatar_url VARCHAR(256),
     join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -17,7 +17,7 @@ SELECT * FROM Member;
 
 -- User registration
 INSERT INTO Member (username, password_hash, email, bio)
-VALUES ('Mr.X', 'd45a4510d9cd468676470a27488471e581c5e427ad734faf04c0509669a790e4', "x@gmail.com", "Hello, my name is X");
+VALUES ('Mr.X', 'd45a4510d9cd468676470a27488471e581c5e427ad734faf04c0509669a790e4', 'x@gmail.com', 'Hello, my name is X');
 
 -- User authentication
 SELECT EXISTS(SELECT 1 FROM Member WHERE password_hash = 'd45a4510d9cd468676470a27488471e581c5e427ad734faf04c0509669a790e4' AND id = 1);
@@ -29,7 +29,7 @@ SELECT * FROM Member WHERE username = 'Mr.X';
 UPDATE Member SET bio = 'New bio for user' WHERE id = 1;
 
 -- Update User status
-UPDATE Member SET status = 'online' WHERE id = 1;
+UPDATE Member SET status = 'offline' WHERE id = 1;
 
 -- Delete user
 DELETE FROM Member WHERE id = 1;
