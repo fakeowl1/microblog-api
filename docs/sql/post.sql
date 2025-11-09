@@ -19,3 +19,16 @@ Google has confirmed to Android Authority that all Android development work goin
 -- User delete a post
 DELETE FROM Post WHERE id = 1;
 
+-- User edit a post
+UPDATE Post SET title = 'New title', text = 'New text' WHERE id = 1;
+
+-- User view a post
+SELECT 
+  p.id as post_id,
+  m.username as creator, 
+  title, text, 
+  likes, dislikes, views, 
+  created_at 
+FROM Post p 
+JOIN Member m ON m.id = p.creator_id 
+WHERE p.id = 1;
