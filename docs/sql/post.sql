@@ -16,9 +16,6 @@ VALUES (1, 'Google make Android delevelopment private', 'Google is planning a ma
 
 Google has confirmed to Android Authority that all Android development work going forward will take place in Google’s internal branch. This is a shift from the way Google has worked on Android in the past, which featured frequent updates to the public AOSP branch. Anyone can access AOSP, but the internal branches are only available to Google and companies with a Google Mobile Services (GMS) license, like Samsung, Motorola, and others.');
 
--- User delete a post
-DELETE FROM Post WHERE id = 1;
-
 -- User edit a post
 UPDATE Post SET title = 'New title', text = 'New text' WHERE id = 1;
 
@@ -32,3 +29,6 @@ SELECT
 FROM Post p 
 JOIN Member m ON m.id = p.creator_id 
 WHERE p.id = 1;
+
+-- User delete a post
+DELETE FROM Post WHERE id = 1;
