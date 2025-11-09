@@ -1,27 +1,3 @@
-CREATE TYPE USER_STATUS AS ENUM('online', 'offline');
-
-CREATE Table IF NOT EXISTS Member (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(32) NOT NULL UNIQUE,
-    password_hash VARCHAR NOT NULL,
-    email VARCHAR NOT NULL UNIQUE,
-    status USER_STATUS DEFAULT 'online',
-    bio VARCHAR(128),
-    avatar_url VARCHAR(128),
-    join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS Post (
-    id SERIAL PRIMARY KEY,
-    creator_id INT REFERENCES Member (id),
-    title VARCHAR(32),
-    text VARCHAR(1024),
-    likes INT DEFAULT 0 CHECK (likes >= 0),
-    dislikes INT DEFAULT 0 CHECK (dislikes >= 0),
-    views INT DEFAULT 0 CHECK (views >= 0),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
 CREATE TABLE IF NOT EXISTS Community (
     id SERIAL PRIMARY KEY,
     name VARCHAR(32) UNIQUE,
