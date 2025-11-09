@@ -14,7 +14,7 @@
 | password_hash | VARCHAR               | Хеш паролю                           |
 | email         | UNIQUE VARCHAR        | Унікальний, у форматі пошти          |
 | status        | ENUM(online, offline) | Лише 'online' чи 'offline'           |
-| bio           | VARCHAR(128)          | Не більше 128 символів               |
+| bio           | VARCHAR(128)          | ≤ 128 символів                       |
 | avatar_url    | VARCHAR(128)          | Посилання на зображення              |
 | join_date     | TIMESTAMP             |                                      |
 
@@ -29,8 +29,8 @@
 | Поле          | Тип                         | Обмеження            |
 |---------------|-----------------------------|----------------------|
 | creator_id    | INT (Foreign Key)           |                      |
-| title         | VARCHAR(32)                 | До 32                |
-| text          | VARCHAR(1024)               |                      |
+| title         | VARCHAR(32)                 | ≤ 32 символів        |
+| text          | VARCHAR(1024)               | ≤ 1024 символів      |
 | likes         | INT CHECK (likes >= 0)      | ≥ 0                  |
 | dislikes      | INT CHECK (dislikes >= 0)   | ≥ 0                  |
 | views         | INT CHECK (views >= 0)      | ≥ 0                  |
@@ -46,8 +46,8 @@
 
 | Поле          | Тип                                | Обмеження                            |
 |---------------|------------------------------------|--------------------------------------|
-| name          | UNIQUE VARCHAR(32)                 | Унікальний, без спеціальних символів |
-| bio           | VARCHAR(512)                       | Не більше 512 символів               |
+| name          | UNIQUE VARCHAR(32)                 | Унікальний, ≤ 32 символів           |
+| bio           | VARCHAR(512)                       | ≤ 512 символів                       |
 | avatar_url    | VARCHAR(128)                       | Посилання на зображення              |
 | created_at    | TIMESTAMP                          |                                      |
 
@@ -60,7 +60,7 @@
 | Поле          | Тип               | Обмеження         | 
 |---------------|-------------------|-------------------|
 | post_id       | INT (Foreign Key) |                   |
-| name          | VARCHAR(32)       | До 32 символів    |
+| name          | VARCHAR(32)       | ≤ 32 символів     |
 
 
 ### 5. PostMedia
@@ -72,7 +72,7 @@
 | Поле          | Тип                         | Обмеження            |
 |---------------|-----------------------------|----------------------|
 | post_id       | INT (Foreign Key)           |                      |
-| media_url     | VARCHAR(128)                | До 128               |
+| media_url     | VARCHAR(128)                | ≤ 128 символів       |
 
 
 ### 6. PrivateMessage
@@ -87,7 +87,7 @@
 |---------------|------------------------|------------------------------|
 | sender_id     | INT (Foreign Key)      |                              |
 | receiver_id   | INT (Foreign Key)      |                              |
-| text          | VARCHAR(512)           | До 512                       |
+| text          | VARCHAR(512)           | ≤ 512 символів               |
 | status        | ENUM(readed, unreaded) | Лише 'readed' чи 'unreaded'  |
 | media_url     | VARCHAR(128)           |                              |
 | created_at    | TIMESTAMP              |                              |
@@ -105,8 +105,8 @@
 |---------------|------------------------------|------------------------|
 | creator_id    | INT (Foreign Key)            |                        |
 | post_id       | INT (Foreign Key)            |                        |
-| text          | VARCHAR(512)                 | До 512 символів        |
-| media_url     | VARCHAR(128)                 | До 128 символів        |
+| text          | VARCHAR(512)                 | ≤ 512 символів         |
+| media_url     | VARCHAR(128)                 | ≤ 128 символів        |
 | views         | INT CHECK (views >= 0)       | ≥ 0                    |
 | likes         | INT CHECK (likes >= 0)       | ≥ 0                    |
 | dislikes      | INT CHECK (dislikes >= 0)    | ≥ 0                    |
