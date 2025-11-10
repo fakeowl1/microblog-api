@@ -12,6 +12,16 @@ CREATE TABLE IF NOT EXISTS Member (
     join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Create a Friendship table
+CREATE TYPE FRIENDSHIP_STATUS AS ENUM ('pending', 'accepted', 'rejected');
+
+CREATE TABLE IF NOT EXISTS Friendship (
+    user_id INTEGER references Member (id),
+    friended_id INTEGER references Member (id),
+    status FRIENDSHIP_STATUS NOT NULL,
+    PRIMARY KEY (user_id, friended_id)
+);
+
 -- Get all users
 SELECT * FROM Member;
 
