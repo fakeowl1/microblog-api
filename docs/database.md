@@ -14,8 +14,8 @@
 | password_hash | VARCHAR               | Хеш паролю                           |
 | email         | UNIQUE VARCHAR        | Унікальний, у форматі пошти          |
 | status        | ENUM(online, offline) | Лише 'online' чи 'offline'           |
-| bio           | VARCHAR(128)          | ≤ 128 символів                       |
-| avatar_url    | VARCHAR(128)          | Посилання на зображення              |
+| bio           | VARCHAR(256)          | ≤ 256 символів                       |
+| avatar_url    | VARCHAR(256)          | ≤ 256 символів                       |
 | join_date     | TIMESTAMP             |                                      |
 
 
@@ -29,7 +29,7 @@
 | Поле          | Тип                         | Обмеження            |
 |---------------|-----------------------------|----------------------|
 | creator_id    | INT (Foreign Key)           |                      |
-| title         | VARCHAR(32)                 | ≤ 32 символів        |
+| title         | VARCHAR(64)                 | ≤ 64 символів        |
 | text          | VARCHAR(1024)               | ≤ 1024 символів      |
 | likes         | INT CHECK (likes >= 0)      | ≥ 0                  |
 | dislikes      | INT CHECK (dislikes >= 0)   | ≥ 0                  |
