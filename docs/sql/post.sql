@@ -32,3 +32,12 @@ WHERE p.id = 1;
 
 -- User delete a post
 DELETE FROM Post WHERE id = 1;
+
+-- User likes a post
+UPDATE Post SET likes = likes + 1 WHERE id = 1; 
+
+-- User dislikes a post
+UPDATE Post SET dislikes = dislikes + 1 WHERE id = 1; 
+
+-- User open post
+UPDATE Post SET views = views + 1 WHERE id = 1;
