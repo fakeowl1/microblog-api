@@ -52,16 +52,26 @@ CREATE TABLE IF NOT EXISTS Community (
     created_at TIMESTAMP DEFAULT current_timestamp
 );
 
-CREATE TABLE IF NOT EXISTS CommunityPost (
-  id SERIAL PRIMARY KEY,
-  community_id INT REFERENCES Community (id) ON DELETE CASCADE,
-  post_id INT REFERENCES Post (id)
-);
-
 CREATE TABLE IF NOT EXISTS CommunitySubscription (
     id SERIAL PRIMARY KEY,
     community_id INT REFERENCES Community (id) ON DELETE CASCADE,
     user_id INT REFERENCES Member (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS CommunityPost (
+    id SERIAL PRIMARY KEY,
+    community_id INT REFERENCES Community (id) ON DELETE CASCADE,
+    post_id INT REFERENCES Post (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS PrivateMessage (
+    id SERIAL PRIMARY KEY,
+    sender_id INTEGER REFERENCES Member (id),
+    receiver_id INTEGER REFERENCES Member (id),
+    text VARCHAR(512),
+    status MESSAGE_STATUS NOT NULL,
+    media_url VARCHAR(128),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 );
 
 CREATE TABLE IF NOT EXISTS Comment (
@@ -74,14 +84,4 @@ CREATE TABLE IF NOT EXISTS Comment (
     likes INTEGER CHECK (likes >= 0),
     dislikes INTEGER CHECK (dislikes >= 0),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS PrivateMessage (
-    id SERIAL PRIMARY KEY,
-    sender_id INTEGER references Member (id),
-    receiver_id INTEGER references Member (id),
-    text VARCHAR(512),
-    status MESSAGE_STATUS NOT NULL,
-    media_url VARCHAR(128),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 );
