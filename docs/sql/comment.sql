@@ -5,9 +5,9 @@ CREATE TABLE IF NOT EXISTS Comment (
     post_id INTEGER references Post (id),
     text VARCHAR(512),
     media_url VARCHAR(128),
-    views INTEGER CHECK (views >= 0),
-    likes INTEGER CHECK (likes >= 0),
-    dislikes INTEGER CHECK (dislikes >= 0),
+    views INTEGER CHECK (views >= 0) DEFAULT 0,
+    likes INTEGER CHECK (likes >= 0) DEFAULT 0,
+    dislikes INTEGER CHECK (dislikes >= 0) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
