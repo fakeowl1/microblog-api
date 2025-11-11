@@ -64,6 +64,8 @@ CREATE TABLE IF NOT EXISTS CommunityPost (
     post_id INT REFERENCES Post (id) ON DELETE CASCADE
 );
 
+CREATE TYPE MESSAGE_STATUS AS ENUM('readed', 'unreaded');
+
 CREATE TABLE IF NOT EXISTS PrivateMessage (
     id SERIAL PRIMARY KEY,
     sender_id INTEGER REFERENCES Member (id),
