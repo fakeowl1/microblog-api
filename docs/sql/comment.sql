@@ -32,16 +32,13 @@ WHERE id = 1;
 
 -- View comments for a post
 SELECT
-    c.id,
     m.username AS author,
     c.text,
-    c.likes,
-    c.dislikes,
-    c.views,
+    c.likes, c.dislikes, c.views,
     c.created_at
-FROM Comment c JOIN Member m ON c.creator_id = m.id
-WHERE c.post_id = 1
-ORDER BY c.created_at DESC;
+FROM Comment c 
+JOIN Member m ON c.creator_id = m.id
+WHERE c.post_id = 1;
 
 -- Delete a comment
 DELETE FROM Comment WHERE id = 1;
