@@ -41,9 +41,6 @@ UPDATE Member SET bio = 'New bio for user' WHERE id = 1;
 -- Update User status
 UPDATE Member SET status = 'offline' WHERE id = 1;
 
--- Delete user
-DELETE FROM Member WHERE id = 1;
-
 -- Send friendship request
 INSERT INTO Friendship (user_id, friended_id, status)
 VALUES (1, 2, 'pending');
@@ -98,3 +95,6 @@ SELECT COUNT(*) AS remaining
 FROM Friendship
 WHERE (user_id = 1 AND friended_id = 2)
    OR (user_id = 2 AND friended_id = 1);
+
+-- Delete user
+DELETE FROM Member WHERE id = 1;
