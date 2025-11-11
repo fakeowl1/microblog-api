@@ -25,7 +25,7 @@ WHERE id = 1 AND receiver_id = 2;
 -- View messages from a user
 SELECT 
     pm.id,
-    sender.username AS "from_user",
+    sender.username AS from_user,
     pm.text,
     pm.status,
     pm.media_url,
