@@ -142,8 +142,12 @@
 | creator_id    | INT (Foreign Key)            |                        |
 | post_id       | INT (Foreign Key)            |                        |
 | text          | VARCHAR(512)                 | ≤ 512 символів         |
-| media_url     | VARCHAR(128)                 | ≤ 128 символів        |
+| media_url     | VARCHAR(128)                 | ≤ 128 символів         |
 | views         | INT CHECK (views >= 0)       | ≥ 0                    |
 | likes         | INT CHECK (likes >= 0)       | ≥ 0                    |
 | dislikes      | INT CHECK (dislikes >= 0)    | ≥ 0                    |
 | created_at    | TIMESTAMP                    |                        |
+
+## Тестування
+
+![](../assets/member/1.png)
