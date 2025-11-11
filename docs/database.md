@@ -151,3 +151,15 @@
 ## Тестування
 
 ![1](./assets/member/1.png)
+![2](./assets/member/2.png)
+![3](./assets/member/3.png)
+![4](./assets/member/4.png)
+![5](./assets/member/5.png)
+![6](./assets/member/6.png)
+![7](./assets/member/8.png)
+![8](./assets/member/8.png)
+![9](./assets/member/9.png)
+![10](./assets/member/10.png)
+![11](./assets/member/11.png)
+![12](./assets/member/12.png)
+![13](./assets/member/13.png)
