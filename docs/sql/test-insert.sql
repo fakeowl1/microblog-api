@@ -11,8 +11,9 @@ VALUES
 
 INSERT INTO Community (name, bio, avatar_url, created_at)
 VALUES
-('microbloggers', 'Спільнота людей, які діляться думками кожного дня.', 'https://example.com.png', '2025-03-01'),
-('smm_learners', 'Для тих, хто вивчає SMM та хоче просувати бренди.', 'https://example.com.jpg', '2025-03-15');
+('microbloggers', 'Спільнота людей, які діляться думками кожного дня.', 'https://example.com/avatar2.png', '2025-03-01'),
+('smm_learners', 'Для тих, хто вивчає SMM та хоче просувати бренди.', 'https://example.com/avatar1.jpg', '2025-03-15'),
+('opensource', 'спільна ентузіастів вільного програмного забезпечення', 'https://example.com/avatar3.jpg', '2025-03-15');
 
 INSERT INTO Tag (post_id, name)
 VALUES
