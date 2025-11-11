@@ -15,7 +15,6 @@ CREATE TABLE IF NOT EXISTS Comment (
 INSERT INTO Comment (creator_id, post_id, text)
 VALUES (1, 1, 'Цікавий пост! Дякую за інформацію');
 
-
 -- Edit a comment
 UPDATE Comment
 SET text = 'Дуже цікавий пост! Дякую за інформацію'
