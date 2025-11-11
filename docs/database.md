@@ -150,4 +150,4 @@
 
 ## Тестування
 
-![](../assets/member/1.png)
+![1](./assets/member/1.png)
