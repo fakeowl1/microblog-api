@@ -38,9 +38,6 @@ WHERE cp.community_id = 1;
 -- Update information about community
 UPDATE Community SET name = 'Orange Pi', bio = 'The Orange Pi community' WHERE id = 1;
 
--- Delete a community
-DELETE FROM Community WHERE id = 1;
-
 -- Create table for CommunitySubscriptions
 CREATE TABLE IF NOT EXISTS CommunitySubscription (
     id SERIAL PRIMARY KEY,
@@ -63,3 +60,6 @@ FROM CommunitySubscription cs
 JOIN Member m ON m.id = cs.user_id
 JOIN Community c ON c.id = cs.community_id
 WHERE cs.user_id = 1;
+
+-- Delete a community
+DELETE FROM Community WHERE id = 1;
