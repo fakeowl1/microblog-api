@@ -45,36 +45,11 @@ UPDATE Member SET status = 'offline' WHERE id = 1;
 INSERT INTO Friendship (user_id, friended_id, status)
 VALUES (1, 2, 'pending');
 
--- Verify request sent
-SELECT
-    sender.username AS "from",
-    receiver.username AS "to",
-    f.status
-FROM Friendship AS f
-JOIN Member AS sender ON f.user_id = sender.id
-JOIN Member AS receiver ON f.friended_id = receiver.id
-WHERE f.user_id = 1 AND f.friended_id = 2;
-
 -- Accept friendship request
 UPDATE Friendship SET status = 'accepted' WHERE user_id = 2 AND friended_id = 1;
 
--- Verify accepted
-SELECT
-    sender.username AS "from",
-    receiver.username AS "to",
-    f.status
-    FROM Friendship AS f
-JOIN Member AS sender  ON f.user_id = sender.id
-JOIN Member AS receiver ON f.friended_id = receiver.id
-WHERE (f.user_id = 1 AND f.friended_id = 2)
-   OR (f.user_id = 2 AND f.friended_id = 1);
-
 -- Reject friendship request
 UPDATE Friendship SET status = 'rejected' WHERE user_id = 2 AND friended_id = 1;
-
--- Verify rejected
-SELECT status FROM Friendship
-WHERE user_id = 2 AND friended_id = 1;
 
 -- View pending incoming requests
 SELECT m.username FROM Friendship f
@@ -89,12 +64,6 @@ WHERE f.user_id = 1 AND f.status = 'accepted';
 -- Remove friend
 DELETE FROM Friendship
 WHERE (user_id = 1 AND friended_id = 2) OR (user_id = 2 AND friended_id = 1);
-
--- Verify removal
-SELECT COUNT(*) AS remaining
-FROM Friendship
-WHERE (user_id = 1 AND friended_id = 2)
-   OR (user_id = 2 AND friended_id = 1);
 
 -- Delete user
 DELETE FROM Member WHERE id = 1;
