@@ -47,13 +47,6 @@ entity "Tag" as Tag {
   name: VARCHAR(32)
 }
 
-entity "PostMedia" as PostMedia {
-  *id: INT
-  --
-  media_url: VARCHAR(128)
-  post_id: INT (FK)
-}
-
 entity "Community" as Community {
   *id: INT
   --
@@ -94,9 +87,6 @@ Post --o{ Tag : has
 
 'One-To-Many
 Post --o{ Comment
-
-'One-to-Many
-Post --o{ PostMedia
 
 User ||--o{ Post: created by
 User ||--o{ Comment: created by
