@@ -60,16 +60,6 @@ CREATE TABLE IF NOT EXISTS CommunityPost (
 
 CREATE TYPE MESSAGE_STATUS AS ENUM('readed', 'unreaded');
 
-CREATE TABLE IF NOT EXISTS PrivateMessage (
-    id SERIAL PRIMARY KEY,
-    sender_id INTEGER REFERENCES Member (id),
-    receiver_id INTEGER REFERENCES Member (id),
-    text VARCHAR(512),
-    status MESSAGE_STATUS NOT NULL,
-    media_url VARCHAR(128),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
-);
-
 CREATE TABLE IF NOT EXISTS Comment (
     id SERIAL PRIMARY KEY,
     creator_id INTEGER references Member (id),
