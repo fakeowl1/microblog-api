@@ -1,3 +1,41 @@
+# Use Cases
+
+1. Register Account
+2. Login By Username And Password
+3. View Profile Information
+4. Edit Own Profile Information
+5. Delete Own Account
+6. Search User by Username
+7. Send Friendship Request
+8. View Incoming Friendship Request
+9. Accept Friendship Request
+10. Decline Friendship Request
+11. View Friends List
+12. Remove Friend
+13. Create Post
+14. Edit Own Post
+15. Delete Own Post
+16. View Posts
+17. Generate Feed From Subscribed Friends/Communities
+18. Update Like/Dislike Counters
+19. Like Post
+20. Dislike Post
+21. Reply to Comment Under The Post
+22. Add Comment Under The Post
+23. Edit Comment
+24. Delete Comment
+25. Like Comment Under The Post
+26. Dislike Comment Under The Post
+27. Send Notification to User’s Browser
+28. Join Community
+29. Add Post to Community
+30. Remove Post from Community
+31. Search Post By Tag
+32. Create New Community
+33. Edit Community Information
+34. Delete Community
+35. Leave Community
+
 # Functional вимоги до системи
 
 ## 1. Управлінням профілем користувача 
