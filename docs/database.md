@@ -1,5 +1,4 @@
 ## Сутності
-
 ### 1. Member
 - Реєстрація
 - Автентифікація
@@ -99,25 +98,7 @@
 | post_id       | INT (Foreign Key)                  |                        |
 
 
-### 8. PrivateMessage
-- Надіслати користувачу
-- Редагувати
-- Переглянути
-- Видалити
-- Позначити як прочитане
-
-
-| Поле          | Тип                    | Обмеження                    | 
-|---------------|------------------------|------------------------------|
-| sender_id     | INT (Foreign Key)      |                              |
-| receiver_id   | INT (Foreign Key)      |                              |
-| text          | VARCHAR(512)           | ≤ 512 символів               |
-| status        | ENUM(readed, unreaded) | Лише 'readed' чи 'unreaded'  |
-| media_url     | VARCHAR(128)           |                              |
-| created_at    | TIMESTAMP              |                              |
-
-
-### 9. Comment
+### 8. Comment
 - Додати під публікацією
 - Змінити
 - Видалити
