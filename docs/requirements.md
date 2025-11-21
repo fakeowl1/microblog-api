@@ -1,40 +1,40 @@
 # Use Cases
 
-1. Register Account
-2. Login By Username And Password
-3. View Profile Information
-4. Edit Own Profile Information
-5. Delete Own Account
-6. Search User by Username
-7. Send Friendship Request
-8. View Incoming Friendship Request
-9. Accept Friendship Request
-10. Decline Friendship Request
-11. View Friends List
-12. Remove Friend
-13. Create Post
-14. Edit Own Post
-15. Delete Own Post
-16. View Posts
-17. Generate Feed From Subscribed Friends/Communities
-18. Update Like/Dislike Counters
-19. Like Post
-20. Dislike Post
-21. Reply to Comment Under The Post
-22. Add Comment Under The Post
-23. Edit Comment
-24. Delete Comment
-25. Like Comment Under The Post
-26. Dislike Comment Under The Post
-27. Send Notification to User’s Browser
-28. Join Community
-29. Add Post to Community
-30. Remove Post from Community
-31. Search Post By Tag
-32. Create New Community
-33. Edit Community Information
-34. Delete Community
-35. Leave Community
+- UC1: Register Account
+- UC2: Login By Username And Password
+- UC3: View Profile Information
+- UC4: Edit Own Profile Information
+- UC5: Delete Own Account
+- UC6: Search User by Username
+- UC7: Send Friendship Request
+- UC8: View Incoming Friendship Request
+- UC9: Accept Friendship Request
+- UC10: Decline Friendship Request
+- UC11: View Friends List
+- UC12: Remove Friend
+- UC13: Create Post
+- UC14: Edit Own Post
+- UC15: Delete Own Post
+- UC16: View Posts
+- UC17: Generate Feed From Subscribed Friends/Communities
+- UC18: Update Like/Dislike Counters
+- UC19: Like Post
+- UC20: Dislike Post
+- UC21: Reply to Comment Under The Post
+- UC22: Add Comment Under The Post
+- UC23: Edit Comment
+- UC24: Delete Comment
+- UC25: Like Comment Under The Post
+- UC26: Dislike Comment Under The Post
+- UC27: Send Notification to User’s Browser
+- UC28: Join Community
+- UC29: Add Post to Community
+- UC30: Remove Post from Community
+- UC31: Search Post By Tag
+- UC32: Create New Community
+- UC33: Edit Community Information
+- UC34: Delete Community
+- UC35: Leave Community
 
 # Functional вимоги до системи
 
@@ -62,17 +62,10 @@
 
 ## 4. Взаємодія з контентом
 
-<<<<<<< HEAD
 - FR14: Можливість лайкнути/дизлайкнути пост
 - FR15: Можливість залишити комментар під постом
 - FR16: Можливість лайкнути/дизлайкнути комментар
 - FR17: Можливість відповісти на комментар
-=======
-- Можливість лайкнути/дизлайкнути пост
-- Можливість залишити коментар під постом
-- Можливість лайкнути/дизлайкнути комментар
-- Можливість відповісти на комментар
->>>>>>> main
 
 ## 5. Управління спільнотами
 - Створення нової спільноти
