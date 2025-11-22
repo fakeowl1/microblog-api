@@ -1,0 +1,65 @@
+@startuml
+left to right direction
+skinparam usecase {
+  BackgroundColor white
+  BorderColor black
+}
+
+actor User
+actor Admin
+actor System
+
+User --> (Register Account)
+User --> (Login By Username And Password)
+User --> (View Profile Information)
+User --> (Edit Own Profile Information)
+User --> (View Friends List)
+User --> (Remove Friend)
+User --> (Send Friendship Request)
+User --> (View Incoming Friendship Request)
+User --> (Accept Friendship Request)
+User --> (Decline Friendship Request)
+User --> (Search User By Username)
+User --> (Search Post By Tag)
+User --> (View Posts)
+User --> (Generate Feed From Subscribed Friends, Communities)
+User --> (Add Comment Under The Post)
+User --> (Reply To Comment Under The Post)
+User --> (Like Comment Under The Post)
+User --> (Dislike Comment Under The Post)
+User --> (Like Post)
+User --> (Dislike Post)
+User --> (Create Post)
+User --> (Edit Own Post)
+User --> (Delete Own Post)
+User --> (Create New Community)
+User --> (Join Community)
+User --> (Leave Community)
+User --> (Delete Own Account)
+User --> (Add Post To Community)
+
+Admin --> (Edit Comment)
+Admin --> (Delete Comment)
+Admin --> (Remove Post From Community)
+Admin --> (Edit Community Information)
+Admin --> (Delete Community)
+
+System --> (Send Notification to user's browser)
+System --> (Send Friendship Request)
+
+(Login By Username And Password) --> (Accept Friendship Request) : <<include>>
+(Login By Username And Password) --> (Decline Friendship Request) : <<include>>
+(Login By Username And Password) --> (View Incoming Friendship Request) : <<include>>
+(Login By Username And Password) --> (Create Post) : <<include>>
+(Login By Username And Password) --> (Edit Own Post) : <<include>>
+(Login By Username And Password) --> (Delete Own Post) : <<include>>
+(Login By Username And Password) --> (Create New Community) : <<include>>
+(Login By Username And Password) --> (Delete Own Account) : <<include>>
+
+(Generate Feed From Subscribed Friends, Communities) --> (View Posts) : <<extend>>
+(Reply To Comment Under The Post) --> (Add Comment Under The Post) : <<extend>>
+
+(Like Post) ..> (Update Like/Dislike Counters) : <<Use>>
+(Dislike Post) ..> (Update Like/Dislike Counters) : <<Use>>
+
+@enduml
