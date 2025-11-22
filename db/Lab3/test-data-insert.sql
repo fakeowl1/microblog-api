@@ -27,18 +27,6 @@ VALUES
 (2, 'бренди'),
 (3, 'досвід');
 
-INSERT INTO PostMedia (post_id, media_url)
-VALUES
-(1, 'https://example.com/media/bla.jpg'),
-(2, 'https://example.com/media/blabla.png'),
-(3, 'https://example.com/media/blabla2.jpg');
-
-INSERT INTO PrivateMessage (sender_id, receiver_id, text, status, media_url)
-VALUES
-(1, 2, 'Мені здається, ми спеціальності', 'readed', NULL),
-(1, 2, 'сплутали', 'readed', NULL),
-(2, 3, 'треба було йти на філософію', 'unreaded', NULL);
-
 INSERT INTO Comment (creator_id, post_id, text, views, likes, dislikes)
 VALUES
 (2, 1, 'Классно!', 10, 4, 0),
