@@ -31,5 +31,5 @@ ORDER BY m.id ASC;
 ```sql
 SELECT COUNT(DISTINC p.id) as number_of_posts
 FROM Post p
-INNER JOIN Tag t ON t.post_id = p.id
+INNER JOIN Tag t ON t.post_id = p.id;
 ```
