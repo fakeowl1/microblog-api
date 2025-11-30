@@ -26,8 +26,9 @@ GROUP BY c.name;
 
 SELECT c.name AS community, m.username AS subscriber
 FROM Community c
-FULL JOIN CommunitySubscription cs ON cs.community_id = c.id
-FULL JOIN Member m ON m.id = cs.user_id;
+INNER JOIN CommunitySubscription cs ON cs.community_id = c.id
+INNER JOIN Member m ON m.id = cs.user_id
+ORDER BY c.name;
 
 
 SELECT m.username, p.id AS post_id, p.title

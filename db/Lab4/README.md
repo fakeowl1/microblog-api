@@ -48,8 +48,9 @@ GROUP BY c.name;
 ```sql
 SELECT c.name AS community, m.username AS subscriber
 FROM Community c
-FULL JOIN CommunitySubscription cs ON cs.community_id = c.id
-FULL JOIN Member m ON m.id = cs.user_id;
+INNER JOIN CommunitySubscription cs ON cs.community_id = c.id
+INNER JOIN Member m ON m.id = cs.user_id
+ORDER BY c.name;
 ```
 
 ## 7. Вивести список постів, навіть якщо постів немає
