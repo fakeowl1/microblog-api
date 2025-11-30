@@ -2,7 +2,7 @@ SELECT COUNT(*) AS number_of_members FROM Member;
 
 
 SELECT ROUND(AVG(p.likes)) as avg_likes
-FROM Post
+FROM Post p
 WHERE creator_id = 1;
 
 
@@ -53,7 +53,7 @@ FROM Comment
 WHERE LENGTH(text) > 100);
 
 
-SELECT m.username, AVG(p.likes) AS avg_likes
+SELECT m.username, ROUND(AVG(p.likes), 1) AS avg_likes
 FROM Member m
 JOIN Post p ON p.creator_id = m.id
 GROUP BY m.username

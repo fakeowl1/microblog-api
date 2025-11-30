@@ -12,7 +12,7 @@ SELECT COUNT(*) AS number_of_members FROM Member;
 
 ```sql
 SELECT ROUND(AVG(p.likes)) as avg_likes
-FROM Post
+FROM Post p
 WHERE creator_id = 1;
 ``` 
 
@@ -87,7 +87,7 @@ WHERE LENGTH(text) > 100);
 ## 10. Вивести користувачів з середнєю кількістю лайків на пост > 10
 
 ```sql
-SELECT m.username, AVG(p.likes) AS avg_likes
+SELECT m.username, ROUND(AVG(p.likes), 1) AS avg_likes
 FROM Member m
 JOIN Post p ON p.creator_id = m.id
 GROUP BY m.username
