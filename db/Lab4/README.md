@@ -29,7 +29,7 @@ ORDER BY m.id ASC;
 ## 4. Порахувати кількість постів у яких кількість тегів більше чим 0
 
 ```sql
-SELECT COUNT(DISTINC p.id) as number_of_posts
+SELECT COUNT(DISTINCT p.id) as number_of_posts
 FROM Post p
 INNER JOIN Tag t ON t.post_id = p.id;
 ```
@@ -59,4 +59,37 @@ SELECT m.username, p.id AS post_id, p.title
 FROM Post p
 RIGHT JOIN Member m ON p.creator_id = m.id
 ORDER BY m.username;
+```
+
+## 8. Порахувати для кожного користувача кількість друзів
+
+```sql
+SELECT m.username,
+(SELECT COUNT(*)
+FROM Friendship f
+WHERE (f.user_id = m.id OR f.friended_id = m.id)
+AND f.status = 'accepted') AS friends_count
+FROM Member m
+ORDER BY friends_count DESC;
+```
+
+## 9. Вивести користувачів, які мають хоч один коментар понад 100 символів
+
+```sql
+SELECT username
+FROM Member
+WHERE id IN 
+(SELECT creator_id 
+FROM Comment
+WHERE LENGTH(text) > 100);
+```
+
+## 10. Вивести користувачів з середнєю кількістю лайків на пост > 10
+
+```sql
+SELECT m.username, AVG(p.likes) AS avg_likes
+FROM Member m
+JOIN Post p ON p.creator_id = m.id
+GROUP BY m.username
+HAVING AVG(p.likes) > 10;
 ```
