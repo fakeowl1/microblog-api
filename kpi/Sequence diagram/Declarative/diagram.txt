@@ -1,0 +1,48 @@
+@startuml
+actor User
+actor System
+
+== User authentication ==
+opt [If credentials are valid]
+    User -> System: Send credentials
+    System -> User: Grant access
+end
+
+opt [If user enabled 2FA]
+    System -> User: Ask TOTP code
+    User -> System: Send TOTP code
+    opt [If TOTP code is valid]
+        System -> User: Grant access
+    end
+end
+
+== Friend flow ==
+User -> System: Send friend request
+alt [If request is accepted]
+    System -> User: Add user as friend
+end
+
+== Create post ==
+opt [If user is signed in]
+    User -> System: Create post request
+    System -> System: Validate post data
+    System -> User: Post created successfully
+end
+
+== Submit comment ==
+User -> System: Submit comment
+System -> System: Validate comment
+System -> User: Comment created successfully
+System -> User: Notify: "Someone commented your post"
+System -> User: Return updated feed
+
+== Get Feed ==
+opt [If user is signed in]
+    User -> System: Request feed
+    System -> System: Load subscriptions
+    System -> System: Fetch posts from followed users/communities
+    System -> System: Sort posts by recency
+    System -> User: Return feed data
+end
+
+@enduml
