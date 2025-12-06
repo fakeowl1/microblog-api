@@ -22,9 +22,15 @@ end
 == Add user as friend ==
 User -> System: 1. Send friend request
 opt [If request is accepted]
-    System -> User: 2. Add user as friend
-end
+    System -> User: 1. Send a friend request
+    System -> System: 2. Save request to database
+    System -> User: 3. Notify user about request
 
+    opt [if a friend request is accepted]
+      System -> System: 4. Update request status
+      System -> User: 5. Notify a creator
+    end
+end
 
 == Create post ==
 opt [If user is signed in]
