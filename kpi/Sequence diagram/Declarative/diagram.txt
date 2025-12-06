@@ -30,7 +30,7 @@ end
 opt [If user is signed in]
     User -> System: 1. Send "Create Post" request
     System -> System: 2. Validate post data
-    System -> User: 3. Save post to database
+    System -> System: 3. Save post to database
     System -> User: 4. Send status 
     System -> User: 5. System sends notification to followers
 end
@@ -40,7 +40,7 @@ end
 opt [If user is signed in]
   User -> System: 1. Submit comment
   System -> System: 2. Validate comment
-  System -> User: 3. Save comment to database
+  System -> System: 3. Save comment to database
   System -> User: 4. Send status
   System -> User: 5. System sends notification "Someone commented your post"
 end
