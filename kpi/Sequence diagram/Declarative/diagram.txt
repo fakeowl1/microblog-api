@@ -2,47 +2,56 @@
 actor User
 actor System
 
+
 == User authentication ==
 opt [If credentials are valid]
-    User -> System: Send credentials
-    System -> User: Grant access
+    User -> System: 1. Send credentials
+    System -> User: 2. Grant access
 end
 
+
 opt [If user enabled 2FA]
-    System -> User: Ask TOTP code
-    User -> System: Send TOTP code
+    System -> User: 3. Ask TOTP code
+    User -> System: 4. Send TOTP code
     opt [If TOTP code is valid]
-        System -> User: Grant access
+        System -> User: 5. Grant access
     end
 end
 
-== Friend flow ==
-User -> System: Send friend request
-alt [If request is accepted]
-    System -> User: Add user as friend
+
+== Add user as friend ==
+User -> System: 1. Send friend request
+opt [If request is accepted]
+    System -> User: 2. Add user as friend
 end
+
 
 == Create post ==
 opt [If user is signed in]
-    User -> System: Create post request
-    System -> System: Validate post data
-    System -> User: Post created successfully
+    User -> System: 1. Send "Create Post" request
+    System -> System: 2. Validate post data
+    System -> User: 3. Save post to database
+    System -> User: 4. Send status 
+    System -> User: 5. System sends notification to followers
 end
 
-== Submit comment ==
-User -> System: Submit comment
-System -> System: Validate comment
-System -> User: Comment created successfully
-System -> User: Notify: "Someone commented your post"
-System -> User: Return updated feed
+
+== Create comment ==
+opt [If user is signed in]
+  User -> System: 1. Submit comment
+  System -> System: 2. Validate comment
+  System -> User: 3. Save comment to database
+  System -> User: 4. Send status
+  System -> User: 5. System sends notification "Someone commented your post"
+end
 
 == Get Feed ==
 opt [If user is signed in]
-    User -> System: Request feed
-    System -> System: Load subscriptions
-    System -> System: Fetch posts from followed users/communities
-    System -> System: Sort posts by recency
-    System -> User: Return feed data
+    User -> System: 1. Request feed
+    System -> System: 2. Load subscriptions
+    System -> System: 3. Fetch posts from followed users/communities
+    System -> System: 4. Sort posts by recency
+    System -> User: 5. Return feed data
 end
 
 @enduml
