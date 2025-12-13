@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model comment {
+  id         Int       @id @default(autoincrement())
+  creator_id Int?
+  post_id    Int?
+  text       String?   @db.VarChar(512)
+  views      Int?
+  likes      Int?
+  dislikes   Int?
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  member     member?   @relation(fields: [creator_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  post       post?     @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model community {
+  id                    Int                     @id @default(autoincrement())
+  title                 String?                 @unique @db.VarChar(32)
+  bio                   String?                 @db.VarChar(512)
+  avatar_url            String?                 @db.VarChar(128)
+  created_at            DateTime?               @default(now()) @db.Timestamp(6)
+  communitypost         communitypost[]
+  communitysubscription communitysubscription[]
+}
+
+model communitypost {
+  community_id Int
+  post_id      Int
+  community    community @relation(fields: [community_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  post         post      @relation(fields: [post_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([community_id, post_id])
+}
+
+model communitysubscription {
+  community_id Int
+  user_id      Int
+  community    community @relation(fields: [community_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  member       member    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([community_id, user_id])
+}
+
+model friendship {
+  user_id                               Int
+  friended_id                           Int
+  status                                friendship_status
+  member_friendship_friended_idTomember member            @relation("friendship_friended_idTomember", fields: [friended_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  member_friendship_user_idTomember     member            @relation("friendship_user_idTomember", fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([user_id, friended_id])
+}
+
+model member {
+  id                                        Int                     @id @default(autoincrement())
+  username                                  String                  @unique @db.VarChar(32)
+  password_hash                             String                  @db.VarChar
+  email                                     String                  @unique @db.VarChar
+  status                                    user_status?            @default(online)
+  bio                                       String?                 @db.VarChar(256)
+  avatar_url                                String?                 @db.VarChar(256)
+  join_date                                 DateTime?               @default(now()) @db.Timestamp(6)
+  comment                                   comment[]
+  communitysubscription                     communitysubscription[]
+  friendship_friendship_friended_idTomember friendship[]            @relation("friendship_friended_idTomember")
+  friendship_friendship_user_idTomember     friendship[]            @relation("friendship_user_idTomember")
+  post                                      post[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model post {
+  id            Int             @id @default(autoincrement())
+  creator_id    Int?
+  title         String?         @db.VarChar(64)
+  text          String?         @db.VarChar(1024)
+  likes         Int?            @default(0)
+  dislikes      Int?            @default(0)
+  views         Int?            @default(0)
+  created_at    DateTime?       @default(now()) @db.Timestamp(6)
+  comment       comment[]
+  communitypost communitypost[]
+  member        member?         @relation(fields: [creator_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  posttag       posttag[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model posttag {
+  tag_id  Int?
+  post_id Int?
+  post    post? @relation(fields: [post_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tag     tag?  @relation(fields: [tag_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@ignore
+}
+
+model tag {
+  id      Int       @id @default(autoincrement())
+  name    String?   @unique @db.VarChar(32)
+  posttag posttag[]
+}
+
+enum friendship_status {
+  pending
+  accepted
+  rejected
+}
+
+enum user_status {
+  online
+  offline
+}
