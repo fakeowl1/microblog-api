@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -13,7 +13,6 @@ model comment {
   creator_id Int?
   post_id    Int?
   text       String?   @db.VarChar(512)
-  media_url  String?   @db.VarChar(128)
   views      Int?
   likes      Int?
   dislikes   Int?
@@ -54,8 +53,8 @@ model friendship {
   user_id                               Int
   friended_id                           Int
   status                                friendship_status
-  member_friendship_friended_idTomember member            @relation("friendship_friended_idTomember", fields: [friended_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  member_friendship_user_idTomember     member            @relation("friendship_user_idTomember", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  member_friendship_friended_idTomember member            @relation("friendship_friended_idTomember", fields: [friended_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  member_friendship_user_idTomember     member            @relation("friendship_user_idTomember", fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@id([user_id, friended_id])
 }
@@ -92,13 +91,14 @@ model post {
   posttag       posttag[]
 }
 
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model posttag {
-  tag_id  Int
-  post_id Int
-  post    post @relation(fields: [post_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  tag     tag  @relation(fields: [tag_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tag_id  Int?
+  post_id Int?
+  post    post? @relation(fields: [post_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tag     tag?  @relation(fields: [tag_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-  @@id([tag_id, post_id])
+  @@ignore
 }
 
 model tag {
