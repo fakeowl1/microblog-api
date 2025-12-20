@@ -1,0 +1,59 @@
+@startuml
+
+|Member|
+start
+:Open "Create Post" Interface;
+:Enter Post Title and Text;
+
+' ---------- Upload Image ----------
+if (Upload Image?) then (Yes)
+  :Show Image;
+else (No)
+endif
+
+' ---------- Tags ----------
+if (Add Tags?) then (Yes)
+  :Enter Tags;
+else (No)
+endif
+
+' ---------- Community ----------
+if (Post to Community?) then (Yes)
+  :Select Community;
+else (No)
+endif
+
+:Configure Privacy;
+:Submit Post;
+
+|System|
+:Validate Post Data;
+
+if (Data is valid?) then (Yes)
+    :Save Post to Database;
+    |Member|
+    :View Post Preview;
+    :Confirm Publication;
+
+    |System|
+  fork
+    :Create DB Records;
+    :Generate Post URL;
+  fork again
+    :Process Files;
+  end fork
+
+
+  :Notify Member;
+
+else (No)
+  |Member|
+  :Receive Error Message;
+  stop
+endif
+
+|Member|
+:View Published Post;
+
+stop
+@enduml
