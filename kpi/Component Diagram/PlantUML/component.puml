@@ -1,0 +1,211 @@
+@startuml System_Architecture_Microblog_API
+
+skinparam componentStyle uml2
+skinparam linetype polyline
+skinparam component {
+  BackgroundColor WHITE
+  BorderColor Black
+}
+skinparam port {
+  FontSize 0
+  FontColor transparent
+}
+left to right direction
+
+' ===========================================================
+' CLIENT LAYER
+' ===========================================================
+
+package "Client Layer" {
+
+  package "UI Applications" {
+    component "Web App" as ID_WebApp {
+        port " " as pWeb
+    }
+    component "Mobile App" as ID_MobileApp {
+        port " " as pMobile
+    }
+  }
+
+  package "API Clients" {
+    component "Auth API Client" as ID_API_Auth {
+      port " " as pAuthAPI
+    }
+    component "Member API Client" as ID_API_Member {
+      port " " as pMemberAPI
+    }
+    component "Post API Client" as ID_API_Post {
+      port " " as pPostAPI
+    }
+    component "Community API Client" as ID_API_Community {
+      port " " as pCommunityAPI
+    }
+    component "Notification API Client" as ID_API_Notification {
+      port " " as pNotificationAPI
+    }
+  }
+
+  ' Wiring UI to API Clients
+  ID_WebApp --> ID_API_Auth
+  ID_WebApp --> ID_API_Member
+  ID_WebApp --> ID_API_Post
+  ID_WebApp --> ID_API_Community
+  ID_WebApp --> ID_API_Notification
+
+  ID_MobileApp --> ID_API_Auth
+  ID_MobileApp --> ID_API_Member
+  ID_MobileApp --> ID_API_Post
+  ID_MobileApp --> ID_API_Community
+  ID_MobileApp --> ID_API_Notification
+}
+
+' ===========================================================
+' MICROBLOG BACKEND SYSTEM
+' ===========================================================
+
+package "Microblog Backend System" {
+
+  component "HTTP Router / API Gateway" as ID_HTTP_Router {
+    port " " as pHTTPRouter
+  }
+
+  ' ----------------------- AUTH MODULE ------------------------
+  package "Auth Module" {
+    component "Auth Controller" as ID_Auth_Controller {
+      port " " as pCtrlAuth
+    }
+    component "Auth Service" as ID_Auth_Service {
+      port " " as pSvcAuth
+    }
+    component "Auth Repository" as ID_Auth_Repo {
+      port " " as pRepoAuth
+    }
+
+    pCtrlAuth --> pSvcAuth
+    pSvcAuth --> pRepoAuth
+  }
+
+  ' ----------------------- MEMBER MODULE ------------------------
+  package "Member Module" {
+    component "Member Controller" as ID_Member_Controller {
+      port " " as pCtrlMember
+    }
+    component "Member Service" as ID_Member_Service {
+      port " " as pSvcMember
+    }
+    component "Member Repository" as ID_Member_Repo {
+      port " " as pRepoMember
+    }
+
+    pCtrlMember --> pSvcMember
+    pSvcMember --> pRepoMember
+  }
+
+  ' ----------------------- POST MODULE ------------------------
+  package "Post Module" {
+    component "Post Controller" as ID_Post_Controller {
+      port " " as pCtrlPost
+    }
+    component "Post Service" as ID_Post_Service {
+      port " " as pSvcPost
+    }
+    component "Post Repository" as ID_Post_Repo {
+      port " " as pRepoPost
+    }
+
+    pCtrlPost --> pSvcPost
+    pSvcPost --> pRepoPost
+  }
+
+  ' ----------------------- COMMUNITY MODULE -------------------
+  package "Community Module" {
+    component "Community Controller" as ID_Community_Controller {
+      port " " as pCtrlCommunity
+    }
+    component "Community Service" as ID_Community_Service {
+      port " " as pSvcCommunity
+    }
+    component "Community Repository" as ID_Community_Repo {
+      port " " as pRepoCommunity
+    }
+
+    pCtrlCommunity --> pSvcCommunity
+    pSvcCommunity --> pRepoCommunity
+  }
+
+  ' ----------------------- NOTIFICATION MODULE ----------------
+  package "Notification Module" {
+    component "Notification Controller" as ID_Notif_Controller {
+      port " " as pCtrlNotif
+    }
+    component "Notification Service" as ID_Notif_Service {
+      port " " as pSvcNotif
+    }
+    component "Notification Repository" as ID_Notif_Repo {
+      port " " as pRepoNotif
+    }
+
+    pCtrlNotif --> pSvcNotif
+    pSvcNotif --> pRepoNotif
+  }
+}
+
+' ===========================================================
+' EXTERNAL SYSTEMS
+' ===========================================================
+
+package "External Services" {
+    component "SMTP / Email Provider" as ID_SMTP {
+      port " " as pSMTP
+    }
+
+    component "Blob Storage (S3)" as ID_Storage {
+      port " " as pStorage
+    }
+
+    component "Search Engine" as ID_Search {
+      port " " as pSearch
+    }
+}
+
+' Service to External Connections
+ID_Notif_Service --> pSMTP
+ID_Post_Service --> pStorage
+ID_Post_Service --> pSearch
+ID_Member_Service --> pStorage
+
+
+' ===========================================================
+' CLIENT → BACKEND ROUTING
+' ===========================================================
+
+ID_API_Auth --> pHTTPRouter
+ID_API_Member --> pHTTPRouter
+ID_API_Post --> pHTTPRouter
+ID_API_Community --> pHTTPRouter
+ID_API_Notification --> pHTTPRouter
+
+pHTTPRouter --> pCtrlAuth
+pHTTPRouter --> pCtrlMember
+pHTTPRouter --> pCtrlPost
+pHTTPRouter --> pCtrlCommunity
+pHTTPRouter --> pCtrlNotif
+
+' ===========================================================
+' ORM + DATABASE
+' ===========================================================
+
+component "Prisma ORM" as ID_Prisma {
+  port " " as pPrisma
+}
+database "PostgreSQL" as ID_Postgres
+
+pRepoAuth --> pPrisma
+pRepoMember --> pPrisma
+pRepoPost --> pPrisma
+pRepoCommunity --> pPrisma
+pRepoNotif --> pPrisma
+
+pPrisma --> ID_Postgres
+
+@enduml
