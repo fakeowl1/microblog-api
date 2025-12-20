@@ -7,7 +7,7 @@ start
 
 ' ---------- Upload Image ----------
 if (Upload Image?) then (Yes)
-  :Show Image;
+  :View Image;
 else (No)
 endif
 
